@@ -1,0 +1,44 @@
+services:
+
+  db:
+    image: postgres:15
+    container_name: agatha-postgres-production
+    environment:
+      - POSTGRES_DB=${ENV_POSTGRES_DB}
+      - POSTGRES_USER=${ENV_POSTGRES_USER}
+      - POSTGRES_PASSWORD=${ENV_POSTGRES_PASSWORD}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    command: ["postgres", "-c", "max_connections=500"]
+    ports:
+      - "5432:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -h ${ENV_POSTGRES_HOST} -U ${ENV_POSTGRES_USER} -d ${ENV_POSTGRES_DB}"]  # Checks if Postgres is ready
+      interval: 5s                 # Check every 5 seconds
+      timeout: 5s                  # Timeout after 5 seconds
+      retries: 10                  # Retry up to 10 times
+  app:
+    build:
+      context: .
+      dockerfile: production.Dockerfile
+    depends_on:
+      db:
+        condition: service_healthy  # Ensure the db service is healthy before starting app
+    environment:
+      - RAILS_ENV=production
+      - POSTGRES_HOST=${ENV_POSTGRES_HOST}
+      - POSTGRES_DB=${ENV_POSTGRES_DB}
+      - POSTGRES_USER=${ENV_POSTGRES_USER}
+      - POSTGRES_PASSWORD=${ENV_POSTGRES_PASSWORD}
+      - RAILS_MASTER_KEY=${ENV_RAILS_MASTER_KEY}
+    ports:
+      - "3000:3000"
+    volumes:
+      - app-storage:/rails/storage
+      
+    # Remove the command override
+    # command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -b '0.0.0.0'"
+
+volumes:
+  postgres_data: {}
+  app-storage: {}

@@ -1,0 +1,25 @@
+#!/bin/bash
+set -e
+
+# Check if command is rails server (with any arguments)
+echo "docker-development-entrypoint is running."
+sleep 10;
+echo "Waiting for Postgres to be ready…";
+until pg_isready -h $POSTGRES_HOST -U $POSTGRES_USER; do
+    echo "Postgres is unavailable - sleeping";
+    echo "pg_isready exit code: $?"
+    sleep 10;
+done;
+echo 'Postgres is up — starting Rails';
+        
+#if [ "$1" == "./bin/rails" ] && [ "$2" == "server" ]; then
+  #if ! ./bin/rails db:version RAILS_ENV="development" > /dev/null 2>&1; then
+   # echo "Database does not exist or is not set up. Creating anddd preparing..."
+    #./bin/rails db:create RAILS_ENV="development"
+    ./bin/rails db:prepare RAILS_ENV=development
+  #else
+   # echo "Database for development already exists. Skipping creation."
+  #fi
+#fi
+echo "docker-development-entrypoint is still running."
+exec "$@"
