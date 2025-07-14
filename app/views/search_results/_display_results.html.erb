@@ -1,0 +1,78 @@
+<div id="search-results">
+
+  <%= form_tag more_results_domain_crawlers_path, :id => 'more_results_form', method: 'get', remote: true do %>
+      <%= text_field_tag :results_current_index, params[:current_index] %>
+      <%= text_field_tag :results_range, params[:range] %>
+      <%= text_field_tag :results_query_id, params[:query_id], :value => args[:query_id] %>
+      <div class="next-prev"><%= submit_tag "More Results", id: "next-prev-button" %></div>
+  <% end %>
+  <%= form_tag process_more_results_domain_crawlers_path, :id => 'process_more_results_form', method: 'get', remote: true do %>
+      <%= text_field_tag :more_results_query_id, params[:query_id], :value => args[:query_id] %>
+      <%= text_field_tag :more_results_first_result_id, params[:first_result_id], :value => args[:first_result_id] %>
+      <%= text_field_tag :more_results_last_result_id, params[:last_result_id], :value => args[:last_result_id] %>
+      <div class="next-prev"><%= submit_tag "Process More Results", id: "process-more-button" %></div>
+  <% end %>
+
+  <%= form_tag tidy_up_domain_crawlers_path, :id => 'tidy_up_form', method: 'get', remote: true do %>
+      <%= text_field_tag :tidy_user_id, params[:tidy_user_id], :value => args[:user_id] %>
+      <div class="next-prev"><%= submit_tag "Tidy Up Now", id: "tidy-up-button" %></div>
+  <% end %>
+
+  <% if @search_results.length >0 %>
+
+       <% group_ids = [] %>
+
+
+
+      <% crawler_page_id = -1000 %>
+      <% group_str = "" %>
+
+
+      <%= form_tag add_result_domain_crawlers_path, :id => 'add_result_form', method: 'post', remote: true do %>
+          <% @search_results.first(MAX_DISPLAY).each do |search_result| %>
+              <% if search_result.crawler_page_id != -1 %>
+                  <% if @search_groups1 %>
+
+                 <% new_groups = GroupName.find_by_sql("SELECT * FROM group_names gn WHERE gn.user_id = #{current_user.id} AND (SELECT COUNT(*) FROM group_elements ge INNER JOIN search_results sr ON sr.id = ge.search_result_id WHERE ge.group_name_id = gn.id AND sr.begin_display_paragraph_id = #{search_result.begin_display_paragraph_id}) >0 ORDER BY gn.id ASC")%>
+                 <% new_group_ids = new_groups.map{|gn| gn.id} %>
+                      <% logger.info "**************** new_groups = #{new_groups.inspect}"%>
+                  <% if new_group_ids != group_ids %>
+                      <% group_ids = new_group_ids %>
+
+                          <% group_list = new_groups.map{|gn| "<#{gn.name}>"}.join(' ,')%>
+                          <% group_str = ", Groups: " + group_list %>
+
+
+                          <% else %>
+                          <% group_str = "" %>
+                          <% end %>
+
+                      <% end %>
+                  <% logger.info "***** group_str = #{group_str}, search_groups1 = #{@search_groups1}"%>
+                  <% if search_result.crawler_page_id != crawler_page_id or group_str.length > 0 %>
+                      <% crawler_page_id = search_result.crawler_page_id %>
+                      <% crawler_page = CrawlerPage.find_by_id(crawler_page_id) %>
+                      <% download_date = crawler_page.download_date %>
+                      <div class="page-results">
+                        <%= link_to crawler_page.URL+download_date.strftime(" (Access date: %b %e, %Y) ") + group_str, crawler_page.URL, target: '_blank' %>
+                      </div>
+                  <% end %>
+                  <div class="search-result-outer" name="search-result-<%= search_result.id %>">
+                    <div class="search-result-text">
+                      <%= raw(search_result.highlighted_result) %>
+                    </div>
+          <span class="search-check-box ">
+            <input type="checkbox" id="checkbox-search-result-<%= search_result.id %>" name="search_result_list[]" class="check" value=<%= search_result.id %>>
+          </span>
+                    <span class="delete-link"> <%= link_to 'delete', delete_result_domain_crawlers_path(:id => search_result.id), :remote => true %> </span>
+                  </div>
+              <% end %>
+          <% end %>
+          <%= text_field_tag :add_elements_group_id, params[:add_elements_group_id] %>
+          <div class="actions search-action-button"><%= submit_tag "Add Selected", id: "search-action-button" %></div>
+      <% end %>
+      <br>
+  <% else %>
+      <div class="no-results">No results found</div>
+  <% end %>
+</div>

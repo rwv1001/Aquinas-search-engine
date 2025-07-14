@@ -1,23 +1,39 @@
 <!DOCTYPE html>
+
 <html>
-  <head>
-    <title><%= content_for(:title) || "Agatha7dev" %></title>
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
+<%= stylesheet_link_tag "application" %>
 
-    <%= yield :head %>
+<head>
+  <title>St. Thomas the Search Engine</title>
+  <%= csrf_meta_tags %>
+  <% if  current_user == nil %>
+  <script src='https://www.google.com/recaptcha/api.js'></script>
+  <% end %>
 
-    <link rel="manifest" href="/manifest.json">
-    <link rel="icon" href="/icon.png" type="image/png">
-    <link rel="icon" href="/icon.svg" type="image/svg+xml">
-    <link rel="apple-touch-icon" href="/icon.png">
-    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
-    <%= javascript_importmap_tags %>
-  </head>
 
-  <body>
-    <%= yield %>
-  </body>
+<%= javascript_importmap_tags %>
+
+
+
+</head>
+
+<body>
+<%= render 'shared/favicon' %>
+<% @result_str = "" %>
+<div class="sidemenu">
+ <%= render "shared/sidemenu" %>
+ <%= yield %>
+</div>
+
+<%= render "shared/menu" %>
+
+<div class="main-panel">
+  <div class="main-panel-content">
+    
+    <%= render 'shared/instructions' %>
+    <div id="search-results" ></div>
+    <div id="group-results"></div>
+  </div>
+</div>
+</body>
 </html>

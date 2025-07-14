@@ -3,7 +3,7 @@
 # Define variables
 PROD_SERVER="rwvagatha.duckdns.org"  # Replace with your server's IP or hostname
 PROD_DIR="/home/robert/agatha"  # Directory on production server
-LOCAL_DIR="/home/robert/agathaDev/Agatha7dev"  # Local directory with your app files
+LOCAL_DIR="/home/robert/agathaDev/PhilosophyFinder"  # Local directory with your app files
 IMAGE_NAME="rwv1001/agatha"  # Replace with your Docker Hub username and app name
 IMAGE_TAG=$(git rev-parse --short HEAD) # Or use a specific version tag, e.g., "v1.0"
 

@@ -1,0 +1,5 @@
+<div id="group-results">
+  <% group_name = GroupName.find_by_id(args[:group_id]) %>
+  <%= render 'domain_crawlers/display_group_result', args: {:group_name => group_name} %>
+
+</div>

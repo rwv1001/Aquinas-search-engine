@@ -8,6 +8,9 @@ Rails.application.configure do
   # since you don't have to restart the web server when you make code changes.
   config.enable_reloading = true
 
+  config.log_level = :debug
+
+  config.web_console.permissions = '192.168.1.0/24'
   # Do not eager load code on boot.
   config.eager_load = false
 

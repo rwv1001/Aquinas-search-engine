@@ -1,0 +1,8 @@
+<% crawler_page = args[:crawler_page] %>
+<script>
+console.log("RWV test7");
+  </script> 
+
+    <%= render 'domain_crawlers/url', args: {:crawler_page => crawler_page, :crawler_page_ranges => args[:crawler_page_ranges]} %>
+    <%= render 'domain_crawlers/children_crawler_pages', args: {:crawler_page => crawler_page, :crawler_page_ranges => args[:crawler_page_ranges]} %>
+

@@ -13,3 +13,17 @@
  *= require_tree .
  *= require_self
  */
+// app/assets/stylesheets/application.scss
+
+// Any global variables or mixins you want available everywhere:
+@import "base/mixins";
+@import "base/normalize";
+@import "base/globals";
+
+// Your page‑specific styles:
+@import "styles/home";
+@import "styles/posts";
+
+// If you had `main.scss`, you can rename it to `_main.scss`
+// and import it here with:
+@import "main";

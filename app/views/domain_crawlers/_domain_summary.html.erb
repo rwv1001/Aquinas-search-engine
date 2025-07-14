@@ -1,0 +1,87 @@
+
+<div class="domain-summary" id="domain-summary">
+  <div class="float-left">
+    <h3>Domain Summary</h3></div>
+  <%= render 'domain_crawlers/showhide', div_name: "domain_summary" %>
+
+ 
+<% if SuperUser.exists?(user_id: current_user) %>
+  <div class="float-clear" id="select-domain-div">
+    <select id="select-domain-action" name="select-domain-action" onChange="SelectDomainAction()">
+      <option <% if args[:selected] == DOMAIN_ACTION[:select_action] %> selected <% end %> value= <%= DOMAIN_ACTION[:select_action] %> > Select Domain Action</option>
+      <option <% if args[:selected] == DOMAIN_ACTION[:search_domain] %> selected <% end %>  value= <%= DOMAIN_ACTION[:search_domain]%> > Search Domain</option>
+      <option <% if args[:selected] == DOMAIN_ACTION[:search_groups] %> selected <% end %>  value= <%= DOMAIN_ACTION[:search_groups]%> > Search Groups</option>
+      <option <% if args[:selected] == DOMAIN_ACTION[:new_domain]%> selected <% end %>  value= <%= DOMAIN_ACTION[:new_domain]%> > New Domain</option>
+      <option <% if args[:selected] == DOMAIN_ACTION[:grab_domain]%> selected <% end %>  value= <%= DOMAIN_ACTION[:grab_domain]%> > Grab Domain</option>
+      <option <% if args[:selected] == DOMAIN_ACTION[:analyse_domain]%> selected <% end %>  value= <%= DOMAIN_ACTION[:analyse_domain]%> > Analyse Domain</option>
+      <option <% if args[:selected] == DOMAIN_ACTION[:fix_domain]%> selected <% end %>  value= <%= DOMAIN_ACTION[:fix_domain]%> > Fix Domain</option>
+      <option <% if args[:selected] == DOMAIN_ACTION[:reorder_pages]%> selected <% end %>  value= <%= DOMAIN_ACTION[:reorder_pages]%> > Reorder Pages</option>
+      <option <% if args[:selected] == DOMAIN_ACTION[:deaccent_domain]%> selected <% end %>  value= <%= DOMAIN_ACTION[:deaccent_domain]%> > Deaccent Domain</option>
+
+      <option <% if args[:selected] == DOMAIN_ACTION[:set_paragraphs]%> selected <% end %>  value= <%= DOMAIN_ACTION[:set_paragraphs]%> > Set Paragraphs</option>
+      <option <% if args[:selected] == DOMAIN_ACTION[:rename] %> selected <% end %>  value= <%= DOMAIN_ACTION[:rename]%> > Rename Domain</option>
+      <option <% if args[:selected] == DOMAIN_ACTION[:move_domain]%> selected <% end %>  value= <%= DOMAIN_ACTION[:move_domain]%> > Move Domain</option>
+      <option <% if args[:selected] == DOMAIN_ACTION[:remove_domain] %> selected <% end %>  value= <%= DOMAIN_ACTION[:remove_domain]%> > Remove Domain</option>
+    </select>
+  </div>
+      <% else %>
+      <div class="float-clear" id="select-domain-div">
+        <select id="select-domain-action" name="select-domain-action" onChange="SelectDomainAction()">
+          <option  <% if args[:selected] == DOMAIN_ACTION[:search_domain] %> selected <% end %>    value= <%= DOMAIN_ACTION[:search_domain]%> > Search Domain</option>
+          <% if !current_user.guest %>
+          <option  <% if args[:selected] == DOMAIN_ACTION[:search_groups] %> selected <% end %>     value= <%= DOMAIN_ACTION[:search_groups]%> > Search Groups</option>
+          <% end %>
+        </select>
+      </div>
+      <% end %>
+
+  <div class="float-clear" name="domain_summary">
+    <%= form_tag domain_action_domain_crawlers_path, :id => 'domain_action_form', method: 'get', remote: true do %>
+
+        
+<div name="domain_summary_pages">
+    <div >
+
+
+      <ul id="domain_page_list" name = "ul-crawler-page-1">
+      <% DomainCrawler.all.each do |domain_crawler| %>
+
+          <% if domain_crawler.id != DEFAULT_PAGE[:domain_crawler] %>
+            <%= render 'domain_crawlers/domain_pages', domain_crawler: domain_crawler %>
+          <% end %>
+      <% end %>
+      </ul>
+    </div>
+  <div class = "domain_action_name domain-field" id = "domain_flow">
+    <%= label_tag :flow_str %><br/>
+    <%= text_field_tag :flow_str %>
+  </div>
+        <div class="domain-field domain_action_name">
+          <label for="domain_action_name" id = "domain_action_name">Domain action name</label>:<br/>
+          <%= text_field_tag :domain_action_name, params[:domain_action_name] %>
+        </div>
+        <div> <%= hidden_field_tag :remove_domain, params[:remove_domain] %></div>
+</div>
+        <div class="actions domain-field domain-action-button" ><%= submit_tag "New Domain", id: "domain-action-button" %></div>
+    <% end %>
+
+  </div>
+</div>
+<script>  
+document.addEventListener("DOMContentLoaded", () => {
+    SelectDomainAction();
+  });
+</script>
+<% if @result_str.length >0 %>
+  <script>  $("#group_notice").show();
+    $("#group_notice").text("<%= @result_str %>");</script>
+    <%  @result_str = "" %>
+<% end %>
+<% if current_user.guest %>
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+    HideOptions();
+     });
+    </script>
+<% end %>
+

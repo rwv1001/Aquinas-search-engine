@@ -1,0 +1,555 @@
+// Place all the styles related to the pages controller here.
+// They will automatically be included in application.css.scss.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+$crawler-color: #0000ff;
+$menu-color: #3c7cbf;
+$menu-block-color:  lighten($menu-color, 10%);
+$black-border-width: 20px;
+$div-border-width: 3px;
+$thomas-face-color: #bbbbbb;
+$red-border-color: #db0000;
+$menu-width: 375px;
+
+
+@mixin put-margin($val) {
+  margin: $val $val;
+}
+@mixin full-height {
+
+  height: -moz-calc(100vh - 67px);
+  height: -webkit-calc(100vh - 67px);
+  height: calc(100vh - 67px);
+}
+
+
+
+@mixin div-border($color, $width){
+  border-style: solid;
+  border-color: $color;
+  border-width: $width;
+}
+
+.sidemenu{
+  background-color: $menu-color;
+  @include div-border(black, $black-border-width);
+  padding: 10px;
+  @include full-height;
+
+
+  width: $menu-width;
+  float: left;
+  overflow: auto;
+
+
+}
+
+.dominican-logo{
+
+
+  height: 167px;
+  padding-bottom: 10px;
+  background: asset-url('DominicanLogo.png') center no-repeat;
+
+}
+.thomas-header{
+
+  font-size: 1.5em;
+  text-align: center;
+  font-weight: bold;
+  padding: 10px;
+}
+.login-status-div{
+  font-size: 0.75em;
+  text-align: center;
+}
+
+.user-header{
+  @include put-margin(10px);
+  background-color: $thomas-face-color;
+  padding: 10px;
+  @include div-border(black, $div-border-width);
+
+}
+
+
+
+.domain-summary{
+  @include put-margin(10px);
+  background-color: $menu-block-color;
+  overflow: auto;
+  padding: 10px;
+  @include div-border($red-border-color, $div-border-width);
+
+
+}
+
+.domain-new{
+  @include put-margin(10px);
+  background-color: $menu-block-color;
+  overflow: auto;
+  display: none;
+  padding: 10px;
+  @include div-border($red-border-color, $div-border-width);
+
+}
+.bad_page{
+  display: none;
+}
+
+.result-groups{
+  @include put-margin(10px);
+  background-color: $menu-block-color;
+  overflow: auto;
+  padding: 10px;
+  @include div-border($red-border-color, $div-border-width);
+
+
+}
+
+.search-new, .search-old{
+  @include put-margin(10px);
+  background-color: $menu-block-color;
+  overflow: auto;
+  display: none;
+  padding: 10px;
+  @include div-border($red-border-color, $div-border-width);
+
+}
+
+.div-child-crawler-page{
+  overflow:hidden;
+  clear: both;
+
+}
+.domain-pages{
+
+  overflow:hidden
+
+
+}
+.group-names{
+
+  overflow:hidden
+
+
+}
+.next-link, .prev-link{
+  cursor: pointer;
+}
+.show-link{
+  cursor: pointer;
+  float: right;
+  display: none;
+}
+.hide-link{
+  cursor: pointer;
+  float: right;
+
+}
+.crawler{
+  background-color: $crawler-color;
+}
+.crawler10d{
+  background-color: darken($crawler-color, 10%);
+}
+.crawler10l{
+  background-color: lighten($crawler-color, 10%);
+}
+.crawler20l{
+  background-color: lighten($crawler-color, 20%);
+}
+.small-box1{background:#ff0;
+  width: 12px;
+  height: 12px;}
+.small-box2{background:#f0f;
+  width: 12px;
+  height: 12px;}
+.small-box3{background:#40f;
+  width: 12px;
+  height: 12px;}
+.small-box4{background:#f04;
+  width: 12px;
+  height: 12px;}
+.small-box5{background:#0ff;
+  width: 12px;
+  height: 12px;}
+h3{
+  margin-top:0px;
+  margin-bottom:0px;
+}
+p{
+  margin-top:0px;
+  margin-bottom:0px;
+}
+ul{
+  margin-top:0px;
+  margin-bottom:0px;
+
+}
+
+body {
+  background-color: #cbd4d4;
+  overflow: hidden;
+}
+.float-left {
+  float: left;
+}
+.float-right {
+  float: right;
+}
+
+.float-clear {
+  clear: both;
+}
+.clear-left{
+  float: left;
+  clear: both;
+}
+.overflow-auto{
+  overflow: auto;
+}
+.width100pc {
+  width: 100%;
+}
+
+.width300px {
+  width: 300px;
+}
+.height100pc {
+  height: 100%;
+}
+
+.height300px {
+  height: 300px;
+}
+
+.heightdv {
+  height: 100vh;
+}
+
+.red {
+  background-color: #ff0000;
+}
+.highlight{
+  background-color: #fff78c;
+  .highlight{
+    background-color: #d7ff91;
+    .highlight{
+      background-color: #9fffb4;
+      .highlight{
+        background-color: #d0f0ff;
+        .highlight{
+          background-color: #c4c7ff;
+          .highlight{
+            background-color: #efd1ff;
+            .highlight{
+              background-color: #ffd1f0;
+              .highlight{
+                background-color: #ffddd6;
+                .highlight{
+                  background-color: #ffefc1;
+                }
+              }
+            }
+          }
+
+        }
+      }
+    }
+  }
+}
+
+.green {
+  background-color: #00ff00;
+}
+
+.blue {
+  background-color: #0000ff;
+}
+.yellow{
+  background-color: #ffff00;
+}
+.margin10{
+  margin: 10px 10px;
+}
+li{
+
+  list-style-type: none;
+  &:not(:first-child){
+    float: left;
+    clear: both;}
+  &:first-child{
+    clear: both;
+
+  }
+  div{
+    float: left;
+  }
+}
+ul{
+  &:first-child{padding: 5px;}
+  &:not(:first-child){padding: 12px;}
+}
+@mixin main-width($val) {
+  margin: $val $val;
+  width: -moz-calc(#{$val});
+  width: -webkit-calc(#{$val});
+  width: calc(#{$val});
+
+}
+@mixin full-height-p {
+
+  height: -moz-calc(100vh - 122px);
+  height: -webkit-calc(100vh - 122px);
+  height: calc(100vh - 122px);
+}
+#instructions{
+  background-color: #BBBBBB;
+  padding: 10px;
+}
+td{
+  width: 50%;
+}
+
+
+.main-panel{
+  @include main-width("100% - #{$menu-width} - 23.5px - #{$black-border-width}*3");
+
+
+  overflow-x: hidden;
+  overflow-y: auto;
+  background-color: #454848;
+
+  @include full-height-p;
+  border-top-style: solid;
+  border-right-style: solid;
+  border-bottom-style: solid;
+  border-left-style: none;
+  border-color: black;
+  border-right-width: $black-border-width;
+  border-top-width: $black-border-width;
+  border-bottom-width: $black-border-width;
+
+}
+.menu-div{
+  @include main-width("100vw  - #{$black-border-width}*2");
+
+  background: image-url('Tileable-Wood-Texture1.png') repeat-x;
+
+
+  //background-color: $menu-block-color;
+  height: 55px;
+
+  border-top-style: solid;
+  border-right-style: solid;
+  border-color: black;
+  border-right-width: $black-border-width;
+  border-top-width: $black-border-width;
+}
+.menu-tab-container{
+  float: left;
+  width: calc((100% - #{$menu-width} - 27px - #{$black-border-width}*3)/4.1);
+}
+
+@mixin menu-tab-image($val){
+  margin: 0 auto;
+
+
+  width: 150px;
+  height: 55px;
+
+  cursor: pointer;
+  background: image-url($val) center;
+}
+
+.menu-tab-search{
+  @include menu-tab-image('search-menu-item1.png');
+}
+
+.menu-tab-groups{
+  @include menu-tab-image('groups-menu-item1.png');
+}
+
+.menu-tab-help{
+  @include menu-tab-image('help-menu-item1.png');
+}
+
+.menu-tab-dominicans{
+  @include menu-tab-image('dominicans-menu-item1.png');
+}
+#process_more_results_form, #more_results_form, #tidy_up_form{
+  display: none;
+}
+
+.move-location-group-name-radio{
+  display: none;
+}
+.move-location-domain-name-radio{
+  display: none;
+}
+.add-result{
+  display: none;
+  cursor: pointer;
+  margin: 0px 0px 0px 10px;
+}
+.remove-group, .remove-domain{
+  display: none;
+  cursor: pointer;
+  margin: 0px 0px 0px 10px;
+}
+#select-group-action{
+  border:none;
+  background-color: #ffffff;
+  overflow:hidden
+}
+
+.group-field{
+  display: none;
+}
+.domain-field{
+  display: none;
+}
+#group_notice, #search_notice{
+
+  background-color: #d2e8ff;
+  padding: 3px 3px 3px 3px;
+  display: none;
+}
+
+
+
+
+
+
+#domain_page_list, #group_names_list {
+
+  .expand-button, .group-expand-button{
+    margin: 3px 0px 0 0px;
+    text-indent: -9999px;
+    cursor: pointer;
+    width: 12px;
+    height: 12px;
+    text-align: center;
+    background: image-url('tiny_plus_button.png') no-repeat;
+  }
+  .contract-button, .group-contract-button{
+    margin: 3px 0px 0 0px;
+    text-indent: -9999px;
+    cursor: pointer;
+    width: 12px;
+    height: 12px;
+    text-align: center;
+    background: image-url('tiny_minus_button.png') no-repeat;
+  //  display: none;
+  }
+  .group-contract-button {
+    display: none;
+  }
+  .domain-selector {
+    margin: 3px 0px 0px 0px;
+
+    text-indent: -9999px;
+    cursor: pointer;
+    width: 12px;
+    height: 12px;
+    text-align: center;
+
+  }
+  .domain-url{
+    cursor: pointer;
+
+  }
+  .group-name{
+    cursor: pointer;
+  }
+}
+#group-results{
+  display:none;
+  h3{
+    background-color: #BBBBBB;
+  }
+
+}
+
+.search-results{
+  overflow: scroll;
+}
+.group-search-action-button{
+  display:none;
+}
+.search-action-button{
+  display: none;
+}
+#add_elements_group_id{
+  display: none;
+}
+.main-panel-content{
+  background-color: #4c4f4f;
+
+}
+.crawler_page_name{
+  background-color: #72869c;
+}
+.group-search-result-outer{
+  background-color: #b9c1c1;
+  overflow: auto;
+  margin: 0px 0px 5px 0px;
+}
+
+
+.search-result-outer{
+  background-color: #b9c1c1;
+  overflow: auto;
+  margin: 0px 0px 5px 0px;
+}
+.search-result-text, .group-search-result-text{
+  background-color: #cecece;
+  padding: 0px 0px 0px 23px;
+  //margin: 0px 0px 0px 23px;
+  width: -moz-calc(100% - 124px);
+  width: -webkit-calc(100% - 124px);
+  width: calc(100% - 124px);
+  float: left;
+}
+
+.group-search-check-box{
+  height: 100%;
+  float: left;
+
+}
+.search-check-box {
+  width: 20px;
+  float: left;
+}
+.delete-link{
+  padding: 0px 0px 0px 23px;
+  a:link{
+    color: black;
+  }
+}
+
+.no-results{
+  padding: 3px;
+  background-color: #999999;
+}
+
+.highlight-sentence{
+  background-color: #b3b3b3;
+}
+
+.page-results {
+  padding: 3px;
+  background-color: #e1cca6;
+  a:link {
+    color: black;
+  }
+  a:visited {
+    color: black;
+  }
+}
+.hidden{
+display: none;
+}
+
+

@@ -1,4 +1,15 @@
 Rails.application.routes.draw do
+  get "home/index"
+
+  resource :session, only: %i[new create destroy]
+  resources :users
+  resources :password_resets
+
+  get "signup", to: "users#new"
+  delete "logout", to: "sessions#destroy", as: :logout
+  get    "login",  to: "sessions#new"
+
+
   resources :posts
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
@@ -12,4 +23,17 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   # root "posts#index"
+  #
+
+
+  resources :domain_crawlers do
+    collection do
+      get  :set_header, :display_group, :delete_result
+      post :search, :add_result, :remove_group_result
+      get  :group_action, :expand_contract_action, :domain_action,
+         :more_results, :process_more_results, :previous_search, :tidy_up
+    end
+  end
+
+  root "users#index"
 end
