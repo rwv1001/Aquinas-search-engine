@@ -26,6 +26,7 @@ services:
       - POSTGRES_PASSWORD=${ENV_POSTGRES_PASSWORD}
     volumes:
       - postgres_data:/var/lib/postgresql/data
+      - /home/robert/aquinasbackup/:/backups
     ports:
       - "5432:5432"
 

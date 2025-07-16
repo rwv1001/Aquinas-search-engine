@@ -5,3 +5,4 @@
 //= link favicon/manifest.json
 //= link favicon/browserconfig.xml
 //= link jquery.min.js
+//= link crawler_page.js

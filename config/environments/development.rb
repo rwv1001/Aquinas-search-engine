@@ -10,7 +10,7 @@ Rails.application.configure do
 
   config.log_level = :debug
 
-  config.web_console.permissions = '192.168.1.0/24'
+
   # Do not eager load code on boot.
   config.eager_load = false
 

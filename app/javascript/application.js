@@ -2,4 +2,4 @@
 import "@hotwired/turbo-rails"
 import "controllers"
 import "jquery"
-import "./crawler_page"
+import "crawler_page"
