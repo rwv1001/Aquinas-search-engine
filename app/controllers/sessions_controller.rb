@@ -11,13 +11,13 @@ class SessionsController < ApplicationController
       if params[:remember_me]
         session.options[:expire_after] = 4.weeks
       end
-      previous_user_ranges = CrawlerRange.where('user_id = ?', user.id)
+      previous_user_ranges = CrawlerRange.where("user_id = ?", user.id)
       if previous_user_ranges.length > 0
         previous_user_ranges.destroy_all
       end
       sql_update = "UPDATE crawler_ranges SET user_id = #{user.id} WHERE user_id = #{guest_user.id}"
       ActiveRecord::Base.connection.execute(sql_update)
-      previous_display_nodes = DisplayNode.where('user_id = ?', user.id)
+      previous_display_nodes = DisplayNode.where("user_id = ?", user.id)
       if previous_display_nodes.length > 0
         previous_display_nodes.destroy_all
       end
@@ -26,7 +26,7 @@ class SessionsController < ApplicationController
 
       user_queries = SearchQuery.where(user_id: user.id)
       if user_queries.length >0
-        view_priority_offset = user_queries.maximum('view_priority')
+        view_priority_offset = user_queries.maximum("view_priority")
       else
         view_priority_offset= 0
       end
@@ -46,7 +46,7 @@ class SessionsController < ApplicationController
 
 
       logger.info "session redirect to domain_crawlers"
-      redirect_to domain_crawlers_url, :notice => ""
+      redirect_to domain_crawlers_url, notice: ""
     else
       flash.now[:alert] = "Invalid email or password"
       render :new
@@ -55,8 +55,7 @@ class SessionsController < ApplicationController
 
   def destroy
     reset_session
-
-    redirect_to root_path, notice: "Logged out successfully."
+    logger.info "session destroyed"
+    redirect_to root_path
   end
-
 end
