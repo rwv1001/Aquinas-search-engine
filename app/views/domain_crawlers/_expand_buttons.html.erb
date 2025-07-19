@@ -1,9 +1,20 @@
 <% if args[:display_node] == false %>
-<div class="expand-button" name="expand-button-<%=args[:id]%>"
-     onclick="expandCrawlerPage(<%=args[:id]%>);">+</div>
+<div class="expand-button" id="id-expand-button-<%=args[:id]%>" name="expand-button-<%=args[:id]%>"
+     >+</div>
     <%logger.info "args[:display_node] = #{args[:display_node]}, drawing +"%>
+    <script nonce="<%= content_security_policy_nonce %>">
+  document.getElementById('id-expand-button-<%=args[:id]%>').addEventListener('click', function() {
+    expandCrawlerPage(<%=args[:id]%>);
+  });
+</script>  
     <% else %>
-<div class="contract-button" name="contract-button-<%=args[:id]%>"
-     onclick="contractCrawlerPage(<%=args[:id]%>);">-</div>
+<div class="contract-button" id="id-contract-button-<%=args[:id]%>" name="contract-button-<%=args[:id]%>"
+     >-</div>
     <%logger.info "args[:display_node] = #{args[:display_node]}, drawing -"%>
+<script nonce="<%= content_security_policy_nonce %>">
+  document.getElementById('id-contract-button-<%=args[:id]%>').addEventListener('click', function() {
+    contractCrawlerPage(<%=args[:id]%>);
+  });
+</script>  
 <% end %>
+

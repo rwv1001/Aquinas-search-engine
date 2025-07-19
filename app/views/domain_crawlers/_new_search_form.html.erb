@@ -3,7 +3,7 @@
     <h3>New Search</h3>
   </div>
 
-  <div class="float-clear" name="search-new">
+  <div class="float-clear" name="search-new" id="id-search-new">
 
     <%= form_tag search_domain_crawlers_path, :id => 'search_form', method: 'post', remote: true, data: { type: :script }  do %>
         <div>
@@ -45,8 +45,13 @@
         </div>
         <div class="actions hidden "><%= submit_tag "Search C" %>
         </div>
-        <div><input type="button" name="search_button"  value="Search" onclick= Search() ></div>
+        <div><input type="button" id="search_button_id" name="search_button"  value="Search"  ></div>
     <% end %>
+ <script nonce="<%= content_security_policy_nonce %>">
+  document.getElementById('search_button_id').addEventListener('click', function() {
+    Search();
+  });
+</script>  
 
   </div>
   <div id = "show-prev-next">

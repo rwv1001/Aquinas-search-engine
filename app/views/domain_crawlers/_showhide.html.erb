@@ -1,3 +1,13 @@
 
-<div class="show-link" name="show_link_<%=div_name%>" onclick="ShowItem('<%=div_name%>');">show</div>
-<div class="hide-link" name="hide_link_<%=div_name%>" onclick="HideItem('<%=div_name%>');">hide</div>
+<div class="show-link" name="show_link_<%=div_name%>" id="id-show-link-<%=div_name%>" >show</div>
+<script nonce="<%= content_security_policy_nonce %>">
+  document.getElementById('id-show-link-<%=div_name%>').addEventListener('click', function() {
+    ShowItem('<%=div_name%>');
+  });
+</script>
+<div class="hide-link" name="hide_link_<%=div_name%>" id="id-hide-link-<%=div_name%>">hide</div>
+<script nonce="<%= content_security_policy_nonce %>">
+  document.getElementById('id-hide-link-<%=div_name%>').addEventListener('click', function() {
+    HideItem('<%=div_name%>');
+  });
+</script>

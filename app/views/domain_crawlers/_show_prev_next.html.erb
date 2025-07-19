@@ -1,12 +1,22 @@
 <div  id = "show-prev-next">
 <% if args[:show_previous] %>
-    <span  class = "prev-link" onclick="MoreResults(<%=args[:first_result_id]%>,<%=-MAX_DISPLAY%>)">
+    <span  class = "prev-link" id="id-prev-link" >
     (Previous <%= MAX_DISPLAY %>)
-  </span>
+    </span>
+     <script nonce="<%= content_security_policy_nonce %>">
+      document.getElementById('id-prev-link').addEventListener('click', function() {
+        MoreResults(<%=args[:first_result_id]%>,<%=-MAX_DISPLAY%>)
+    });
+</script>  
 <% end %>
 <% if args[:show_next]  %>
-    <span  class = "next-link"  onclick="MoreResults(<%=args[:last_result_id]%>,<%=MAX_DISPLAY%>)">
+    <span  class = "next-link" id="id-next-link">
     (Next  <%= MAX_DISPLAY %>)
   </span>
+     <script nonce="<%= content_security_policy_nonce %>">
+      document.getElementById('id-next-link').addEventListener('click', function() {
+        MoreResults(<%=args[:last_result_id]%>,<%=MAX_DISPLAY%>)
+    });
+</script>
 <% end %>
 </div>

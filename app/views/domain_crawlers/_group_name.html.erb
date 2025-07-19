@@ -8,12 +8,22 @@
 <div class="move-location-group-name-radio group-field" >
   <input type="radio" name ="move_location_group_radio" <% if args[:root] %> checked <% end %> value=<%=args[:group_name_id]%> id="move-location-group-name-<%=args[:group_name_id]%>"  >
 </div>
-<div class="add-result group-field" onclick="AddToGroup(<%= args[:group_name_id]%>)">
-Add Results
+<div class="add-result group-field" id="id-add-result-<%=args[:group_name_id]%>">  
+  Add Results
 </div>
-<div class="remove-group group-field" onclick="RemoveGroup(<%= args[:group_name_id]%>)">
+<script nonce="<%= content_security_policy_nonce %>">
+  document.getElementById('id-add-result-<%=args[:group_name_id]%>').addEventListener('click', function() {
+    AddToGroup(<%= args[:group_name_id]%>)
+  });
+</script>  
+<div class="remove-group group-field"  id="id-remove-group-<%=args[:group_name_id]%>">
   Remove
 </div>
+<script nonce="<%= content_security_policy_nonce %>">
+  document.getElementById('id-remove-group-<%=args[:group_name_id]%>').addEventListener('click', function() {
+    RemoveGroup(<%= args[:group_name_id]%>)
+  });
+</script>
 
 
 

@@ -23,3 +23,24 @@
 #   # Report violations without enforcing the policy.
 #   # config.content_security_policy_report_only = true
 # end
+#
+## config/initializers/content_security_policy.rb
+Rails.application.config.content_security_policy do |policy|
+  # allow self and reCAPTCHA
+  policy.script_src :self,
+                    "https://www.google.com",
+                    "https://www.gstatic.com",
+                    # this lambda injects 'nonce-<random>' into the policy
+                    -> { "'nonce-#{content_security_policy_nonce}'" }
+
+  policy.frame_src  :self, "https://www.google.com"
+  # ... any other directives you need ...
+end
+
+# Tell Rails how to generate the nonces:
+Rails.application.config.content_security_policy_nonce_generator = ->(request) do
+  SecureRandom.base64(16)
+end
+
+# Tell Rails which directives get a nonce:
+Rails.application.config.content_security_policy_nonce_directives = %w[script-src]

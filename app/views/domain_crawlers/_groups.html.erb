@@ -39,13 +39,18 @@
           <div class="actions group-field group-action-button" ><%= submit_tag "New Group", id: "group-action-button" %></div>
       <% end %>
     </div>
-    <div><input type="button" class="group-field" name="remove_elements_button"  value="Remove From Group" onclick= RemoveFromGroup() ></div>
+    <div><input type="button" class="group-field" name="remove_elements_button"  value="Remove From Group"  id="id-remove-elements-button" ></div>
+     <script nonce="<%= content_security_policy_nonce %>">
+      document.getElementById('id-remove-elements-button').addEventListener('click', function() {
+        RemoveFromGroup();
+      });
+      </script>  
     <div id="group_notice"></div>
   </div>
 </div>
 
-<script>SelectGroupAction();</script>
-<script>SelectDomainAction();</script>
+<script nonce="<%= content_security_policy_nonce %>">SelectGroupAction();</script>
+<script nonce="<%= content_security_policy_nonce %>">SelectDomainAction();</script>
 
 
 

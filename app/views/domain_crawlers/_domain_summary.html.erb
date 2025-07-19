@@ -67,18 +67,19 @@
 
   </div>
 </div>
-<script>  
+<script nonce="<%= content_security_policy_nonce %>">
+  console.log("RWV test7");  
 document.addEventListener("DOMContentLoaded", () => {
     SelectDomainAction();
   });
 </script>
 <% if @result_str.length >0 %>
-  <script>  $("#group_notice").show();
+  <script nonce="<%= content_security_policy_nonce %>">  $("#group_notice").show();
     $("#group_notice").text("<%= @result_str %>");</script>
     <%  @result_str = "" %>
 <% end %>
 <% if current_user.guest %>
-    <script>
+    <script nonce="<%= content_security_policy_nonce %>">
       document.addEventListener("DOMContentLoaded", () => {
     HideOptions();
      });

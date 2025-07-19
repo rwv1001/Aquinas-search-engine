@@ -2,12 +2,21 @@
 
 <html>
 <%= stylesheet_link_tag "application" %>
+<script nonce="<%= content_security_policy_nonce %>">
+  // make the nonce available to your other scripts
+  window._cspNonce = "<%= content_security_policy_nonce %>";
+</script>
 
 <head>
   <title>St. Thomas the Search Engine</title>
   <%= csrf_meta_tags %>
-  <% if  current_user == nil %>
-  <script src='https://www.google.com/recaptcha/api.js'></script>
+  <%= csp_meta_tag %>
+  <% if  current_user.email == nil %>
+  <script nonce="<%= content_security_policy_nonce %>">console.log("recaptcha api loaded");</script>
+  <script nonce="<%= content_security_policy_nonce %>" src='https://www.google.com/recaptcha/api.js' nonce="<%= content_security_policy_nonce %>"></script>
+  <% else %>
+  <script nonce="<%= content_security_policy_nonce %>">console.log("recaptcha for logged in user:", <%= raw(current_user.to_json) %> );</script>
+  
   <% end %>
 
 

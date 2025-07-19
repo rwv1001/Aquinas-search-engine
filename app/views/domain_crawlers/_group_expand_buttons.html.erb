@@ -1,4 +1,15 @@
-<div class="group-expand-button" name="group-expand-button-<%=id%>"
-     onclick="expandGroupName(<%=id%>);">+</div>
-<div class="group-contract-button" name="group-contract-button-<%=id%>"
-     onclick="contractGroupName(<%=id%>);">-</div>
+<div class="group-expand-button" name="group-expand-button-<%=id%>" id="id-group-expand-button-<%=id%>"
+    >+</div>
+<script nonce="<%= content_security_policy_nonce %>">
+  document.getElementById('id-group-expand-button-<%=id%>').addEventListener('click', function() {
+    expandGroupName(<%=id%>);
+  });
+</script>  
+<div class="group-contract-button" name="group-contract-button-<%=id%>" id="id-group-contract-button-<%=id%>"
+    >-</div>
+<script nonce="<%= content_security_policy_nonce %>">
+  document.getElementById('id-group-contract-button-<%=id%>').addEventListener('click', function() {
+    contractGroupName(<%=id%>);
+  });
+</script>
+      

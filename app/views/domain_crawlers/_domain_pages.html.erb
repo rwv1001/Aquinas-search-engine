@@ -1,12 +1,12 @@
 <div class="domain-pages">
   <% if domain_crawler.crawler_page == nil %>
-  <script>
+  <script nonce="<%= content_security_policy_nonce %>">
 console.log("RWV test5");
   </script> 
       <% domain_crawler.crawler_page = CrawlerPage.where(domain_crawler_id: domain_crawler.id).first.root %>
   <% end %>
 <% if domain_crawler.crawler_page != nil %>
-<script>
+<script nonce="<%= content_security_policy_nonce %>">
 console.log("RWV test6");
   </script> 
       <% crawler_page_ranges = CrawlerRange.where(user_id: current_user.id).order('begin_id asc').map{|range| [range.begin_id, range.end_id]} %>

@@ -1,6 +1,26 @@
   <div class="menu-div">
-    <div  class="menu-tab-container"><div class="menu-tab-search"  onclick="ShowSearchResults()" > </div></div>
-    <div  class="menu-tab-container"><div class="menu-tab-groups"   onclick="ShowGroupResults()" > </div></div>
-    <div  class="menu-tab-container"><div class="menu-tab-help"   onclick="ShowHelp()" > </div></div>
-    <div  class="menu-tab-container"><div class="menu-tab-dominicans"   onclick="ShowDominicans()" > </div></div>
+    <div  class="menu-tab-container"><div class="menu-tab-search" id="id-menu-tab-search"  > </div></div>
+    <script nonce="<%= content_security_policy_nonce %>">
+      document.getElementById('id-menu-tab-search').addEventListener('click', function() {
+        ShowSearchResults();
+      });
+    </script>
+    <div  class="menu-tab-container"><div class="menu-tab-groups" id="id-menu-tab-groups"  > </div></div>
+    <script nonce="<%= content_security_policy_nonce %>">
+      document.getElementById('id-menu-tab-groups').addEventListener('click', function() {
+        ShowGroupResults();
+      });
+    </script>
+    <div  class="menu-tab-container"><div class="menu-tab-help" id="id-menu-tab-help"  > </div></div>
+    <script nonce="<%= content_security_policy_nonce %>">
+      document.getElementById('id-menu-tab-help').addEventListener('click', function() {
+        ShowHelp();
+      });
+    </script>
+    <div  class="menu-tab-container"><div class="menu-tab-dominicans" id="id-menu-tab-dominicans"  > </div></div>
+    <script nonce="<%= content_security_policy_nonce %>">
+      document.getElementById('id-menu-tab-dominicans').addEventListener('click', function() {
+        ShowDominicans();
+      });
+    </script>
   </div>

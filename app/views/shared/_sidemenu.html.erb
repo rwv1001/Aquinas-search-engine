@@ -1,4 +1,4 @@
-    <script>
+    <script nonce="<%= content_security_policy_nonce %>">
 console.log("RWV test1");
   </script> 
   
@@ -16,7 +16,7 @@ console.log("RWV test1");
         <%= render 'domain_crawlers/groups', args: {:selected => GROUP_ACTION[:select_action]} %>
      <% else %>
      
-     <script>
+     <script nonce="<%= content_security_policy_nonce %>">
         document.addEventListener("DOMContentLoaded", () => {
         SelectDomainAction();       
        });

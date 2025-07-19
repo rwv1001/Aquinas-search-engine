@@ -33,10 +33,10 @@
       <%= f.password_field :password_confirmation %>
     </div>
 
-    <%= recaptcha_tags %>
+    <%= recaptcha_tags  %>
 
 
     <div class="actions"><%= f.submit "Sign Up" %></div>
 <% end %>
 
-<script>HideForms();</script>
+<script nonce="<%= content_security_policy_nonce %>">HideForms();</script>

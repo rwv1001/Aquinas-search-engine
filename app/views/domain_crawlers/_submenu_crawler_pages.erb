@@ -1,5 +1,6 @@
 <% crawler_page = args[:crawler_page] %>
-<script>
+<script nonce="<%= content_security_policy_nonce %>">
+  console.log("RWV test5");
 console.log("RWV test7");
   </script> 
 

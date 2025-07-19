@@ -22,4 +22,4 @@
     <div class="actions"><%= f.submit "Update Password" %></div>
 <% end %>
 
-<script>HideForms();</script>
+<script nonce="<%= content_security_policy_nonce %>">HideForms();</script>

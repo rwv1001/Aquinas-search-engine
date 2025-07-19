@@ -1,4 +1,24 @@
 // Configure your import map in config/importmap.rb. Read more: https://github.com/rails/importmap-rails
+const _oldGlobalEval = jQuery.globalEval;
+
+// override it
+jQuery.globalEval = function( data ) {
+  // if no code, do nothing
+  if ( !data ) return;
+
+  // create a script tag so CSP will allow it
+  const script = document.createElement("script");
+  script.text = data;
+  
+  // attach the nonce we exposed in window._cspNonce
+  if (window._cspNonce) {
+    script.nonce = window._cspNonce;
+  }
+
+  document.head.appendChild(script);
+  document.head.removeChild(script);
+};
+
 import "@hotwired/turbo-rails"
 import "controllers"
 import "jquery"
