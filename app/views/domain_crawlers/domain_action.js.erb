@@ -1,6 +1,9 @@
 
+  console.log("g");  
+
 
 $('#domain-summary').replaceWith('<%= j render "domain_crawlers/domain_summary", args: {:selected => @selected} %>');
+
 <% if @crawler_parent_id != nil %>
 <% crawler_id = @crawler_parent_id %>
 <% while crawler_id != nil %>

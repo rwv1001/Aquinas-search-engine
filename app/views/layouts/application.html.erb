@@ -27,6 +27,9 @@
 </head>
 
 <body>
+  <script nonce="<%= content_security_policy_nonce %>">
+  console.log("o");  
+</script>
 <%= render 'shared/favicon' %>
 <% @result_str = "" %>
 <div class="sidemenu">

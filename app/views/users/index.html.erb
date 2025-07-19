@@ -1,4 +1,4 @@
 <script nonce="<%= content_security_policy_nonce %>">
-$(".search-new").show();
-console.log("rwv users index");
+document.dispatchEvent(new Event("index:user_loaded"));  
+console.log("t");
 </script>

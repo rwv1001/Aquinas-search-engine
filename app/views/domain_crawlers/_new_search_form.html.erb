@@ -1,3 +1,6 @@
+<script nonce="<%= content_security_policy_nonce %>">
+  console.log("d");  
+</script>
 <div class="search-new domain-field">
   <div class="float-left">
     <h3>New Search</h3>
@@ -8,7 +11,7 @@
     <%= form_tag search_domain_crawlers_path, :id => 'search_form', method: 'post', remote: true, data: { type: :script }  do %>
         <div>
           <%= label_tag :Word_Separation %><br />
-          <select id="word_separation" name="word_separation" onChange="SelectDomainAction()">
+          <select id="word_separation" name="word_separation">
 
 
             <%  (1..10).to_a.reverse_each do |val| %>
@@ -20,6 +23,12 @@
 
           </select>
         </div>
+        <script nonce="<%= content_security_policy_nonce %>">
+            document.getElementById('word_separation').addEventListener('change', function() {
+            SelectDomainAction();
+            });
+        </script> 
+
 
         <div class="field">
           <%= label_tag :word1 %><br />

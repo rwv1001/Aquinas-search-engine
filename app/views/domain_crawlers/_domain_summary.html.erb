@@ -1,4 +1,6 @@
-
+<script nonce="<%= content_security_policy_nonce %>">
+  console.log("b");
+</script>
 <div class="domain-summary" id="domain-summary">
   <div class="float-left">
     <h3>Domain Summary</h3></div>
@@ -7,7 +9,7 @@
  
 <% if SuperUser.exists?(user_id: current_user) %>
   <div class="float-clear" id="select-domain-div">
-    <select id="select-domain-action" name="select-domain-action" onChange="SelectDomainAction()">
+    <select id="select-domain-action" name="select-domain-action" >
       <option <% if args[:selected] == DOMAIN_ACTION[:select_action] %> selected <% end %> value= <%= DOMAIN_ACTION[:select_action] %> > Select Domain Action</option>
       <option <% if args[:selected] == DOMAIN_ACTION[:search_domain] %> selected <% end %>  value= <%= DOMAIN_ACTION[:search_domain]%> > Search Domain</option>
       <option <% if args[:selected] == DOMAIN_ACTION[:search_groups] %> selected <% end %>  value= <%= DOMAIN_ACTION[:search_groups]%> > Search Groups</option>
@@ -24,15 +26,25 @@
       <option <% if args[:selected] == DOMAIN_ACTION[:remove_domain] %> selected <% end %>  value= <%= DOMAIN_ACTION[:remove_domain]%> > Remove Domain</option>
     </select>
   </div>
+  <script nonce="<%= content_security_policy_nonce %>">
+  document.getElementById('select-domain-action').addEventListener('change', function() {
+    SelectDomainAction();
+  });
+</script>  
       <% else %>
       <div class="float-clear" id="select-domain-div">
-        <select id="select-domain-action" name="select-domain-action" onChange="SelectDomainAction()">
+        <select id="select-domain-action" name="select-domain-action">
           <option  <% if args[:selected] == DOMAIN_ACTION[:search_domain] %> selected <% end %>    value= <%= DOMAIN_ACTION[:search_domain]%> > Search Domain</option>
           <% if !current_user.guest %>
           <option  <% if args[:selected] == DOMAIN_ACTION[:search_groups] %> selected <% end %>     value= <%= DOMAIN_ACTION[:search_groups]%> > Search Groups</option>
           <% end %>
         </select>
       </div>
+      <script nonce="<%= content_security_policy_nonce %>">
+          document.getElementById('select-domain-action').addEventListener('change', function() {
+          SelectDomainAction();
+          });
+      </script> 
       <% end %>
 
   <div class="float-clear" name="domain_summary">
@@ -69,9 +81,7 @@
 </div>
 <script nonce="<%= content_security_policy_nonce %>">
   console.log("RWV test7");  
-document.addEventListener("DOMContentLoaded", () => {
-    SelectDomainAction();
-  });
+  document.dispatchEvent(new Event("domain_summary:loaded"));
 </script>
 <% if @result_str.length >0 %>
   <script nonce="<%= content_security_policy_nonce %>">  $("#group_notice").show();
@@ -80,9 +90,7 @@ document.addEventListener("DOMContentLoaded", () => {
 <% end %>
 <% if current_user.guest %>
     <script nonce="<%= content_security_policy_nonce %>">
-      document.addEventListener("DOMContentLoaded", () => {
-    HideOptions();
-     });
+      document.dispatchEvent(new Event("domain_summary:guest_loaded"));
     </script>
 <% end %>
 

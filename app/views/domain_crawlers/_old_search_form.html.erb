@@ -1,3 +1,6 @@
+<script nonce="<%= content_security_policy_nonce %>">
+  console.log("e");  
+</script>
 <% previous_queries = SearchQuery.where(user_id: args[:user_id]).order('view_priority desc').first(MAX_QUERY_STORE)%>
 <div id = "previous_queries_div" >
 
@@ -14,15 +17,25 @@
         <% end %>
 
            <%= form_tag previous_search_domain_crawlers_path, :id => 'previous_search_form', method: 'get', remote: true do %>
-            <select id="select-previous-search" name="select-previous-search" onchange = "SelectPreviousSearch([<%=arg_array.join(', ') %>])">
+            <select id="select-previous-search" name="select-previous-search" >
               <% previous_queries.each do |previous_query| %>
-              <option  onselect = "SelectPreviousSearch(<%= previous_query.first_search_term %>,<%= previous_query.second_search_term %>,<%= previous_query.third_search_term %>,<%= previous_query.fourth_search_term%>)"
-                       value= <%= previous_query.id %> > 1:<%= previous_query.first_search_term%><% if previous_query.second_search_term.length >0 %>,
+              <option  value= <%= previous_query.id %> > 1:<%= previous_query.first_search_term%><% if previous_query.second_search_term.length >0 %>,
                     2:<%= previous_query.second_search_term%><%end%><% if previous_query.third_search_term.length >0 %>,
                     3:<%= previous_query.third_search_term%><%end%><% if previous_query.fourth_search_term.length >0 %>,
                     4:<%= previous_query.fourth_search_term%><%end%></option>
               <% end %>
             </select>
+            <script nonce="<%= content_security_policy_nonce %>">
+                document.getElementById('select-previous-search').addEventListener('change', function() {
+                var chosen = event.target.value;
+               if (!chosen) return;
+      // Your JS logic here; for demo we just log it:
+                console.log("User selected widget:", chosen);  
+                console.log("raw(arg_array.to_json)=",<%= raw(arg_array.to_json) %>)
+                SelectPreviousSearch(<%= raw(arg_array.to_json) %>);
+               });
+           </script> 
+
 
             <div class="field">
 

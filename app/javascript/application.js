@@ -1,3 +1,4 @@
+import "@hotwired/turbo-rails"
 // Configure your import map in config/importmap.rb. Read more: https://github.com/rails/importmap-rails
 const _oldGlobalEval = jQuery.globalEval;
 
@@ -19,7 +20,22 @@ jQuery.globalEval = function( data ) {
   document.head.removeChild(script);
 };
 
-import "@hotwired/turbo-rails"
+
 import "controllers"
 import "jquery"
 import "crawler_page"
+
+document.addEventListener("domain_summary:loaded", () => {
+  SelectDomainAction();  
+});
+document.addEventListener("domain_summary:guest_loaded", () => {
+  HideOptions();
+});
+document.addEventListener("index:user_loaded", () => {
+  $(".search-new").show();
+});
+document.addEventListener("group:loaded", () => {
+  SelectGroupAction();
+  SelectDomainAction();
+});
+

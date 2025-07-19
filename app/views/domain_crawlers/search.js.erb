@@ -1,3 +1,5 @@
+  console.log("m");  
+
 ShowSearchResults();
 
 $('#search-results').replaceWith('<%= j render "search_results/display_results", args: {:user_id => current_user.id, :first_result_id => @first_result_id, :last_result_id => @last_result_id, :show_previous => @show_previous, :show_next => @show_next, :query_id => @query_id}%>');

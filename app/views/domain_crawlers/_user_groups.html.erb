@@ -1,3 +1,6 @@
+<script nonce="<%= content_security_policy_nonce %>">
+  console.log("f");  
+</script>
 <ul class="child-group-name" name="ul-group-name-<%=args[:parent_id]%>" style="display: none" >
 
   <% args[:group_names].each do |group_name, children| %>

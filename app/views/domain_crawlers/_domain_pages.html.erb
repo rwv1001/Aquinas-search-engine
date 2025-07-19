@@ -1,3 +1,6 @@
+<script nonce="<%= content_security_policy_nonce %>">
+  console.log("a");  
+</script>
 <div class="domain-pages">
   <% if domain_crawler.crawler_page == nil %>
   <script nonce="<%= content_security_policy_nonce %>">

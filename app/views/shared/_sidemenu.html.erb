@@ -1,5 +1,5 @@
     <script nonce="<%= content_security_policy_nonce %>">
-console.log("RWV test1");
+console.log("r");
   </script> 
   
   <%= render 'users/user_header', current_user: current_user %>
@@ -18,8 +18,11 @@ console.log("RWV test1");
      
      <script nonce="<%= content_security_policy_nonce %>">
         document.addEventListener("DOMContentLoaded", () => {
-        SelectDomainAction();       
+        SelectDomainAction();  
+        console.log("RWV added DOMContentLoaded event listener")
+        $(".search-new").show();     
        });
+       document.dispatchEvent(new Event("index:user_loaded"));  
      </script>
      <% end%>
   </div>
