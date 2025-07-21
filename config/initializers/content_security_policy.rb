@@ -26,10 +26,9 @@
 #
 ## config/initializers/content_security_policy.rb
 Rails.application.config.content_security_policy do |policy|
-    if Rails.env.development?
+    if Rails.env.production?
     # Development: allow inline scripts (unsafe!)
     policy.script_src :self,
-                      :unsafe_inline,
                       "https://www.google.com",
                       "https://www.gstatic.com",
                       "https://ga.jspm.io"
@@ -43,13 +42,13 @@ Rails.application.config.content_security_policy do |policy|
                     -> { "'nonce-#{content_security_policy_nonce}'" }
     end
 
-  policy.frame_src  :self, "https://www.google.com"
+  policy.frame_src  :self, "https://www.google.com", "https://www.recaptcha.net"
   # ... any other directives you need ...
 end
-unless Rails.env.development?
+unless Rails.env.production?
 # Tell Rails how to generate the nonces:
 Rails.application.config.content_security_policy_nonce_generator = ->(request) do
-  SecureRandom.base64(16)
+  SecureRandom.base64(4)
 end
 
 # Tell Rails which directives get a nonce:

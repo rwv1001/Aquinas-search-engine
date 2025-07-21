@@ -42,4 +42,4 @@
     <div class="actions"><%= f.submit "Sign Up" %></div>
 <% end %>
 
-<script nonce="<%= content_security_policy_nonce %>">HideForms();</script>
+<script nonce="<%= content_security_policy_nonce %>">document.dispatchEvent(new Event("hideforms")); </script>

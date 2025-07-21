@@ -38,4 +38,7 @@ document.addEventListener("group:loaded", () => {
   SelectGroupAction();
   SelectDomainAction();
 });
+document.addEventListener("hideforms", () => {
+  HideForms();
+});
 

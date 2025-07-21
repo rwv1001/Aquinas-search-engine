@@ -16,6 +16,13 @@ class UsersController < ApplicationController
     logger.info "UsersController create called"
     index
     logger.info "User params inspect #{user_params.inspect}"
+    res = Net::HTTP.post_form(URI("https://www.google.com/recaptcha/api/siteverify"),
+    secret: ENV["RECAPTCHA_SECRET_KEY"],
+    response: params["g-recaptcha-response"],
+    remoteip: request.remote_ip
+)
+result = JSON.parse(res.body)
+Rails.logger.debug "Manual verification: #{result.inspect}"
 
     @user = User.new(user_params)
     user_save = @user.save

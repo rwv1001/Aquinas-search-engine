@@ -17,4 +17,4 @@
     <div class="actions"><%= submit_tag "Log In" %>
     </div>
 <% end %>
-<script nonce="<%= content_security_policy_nonce %>">HideForms();</script>
+<script nonce="<%= content_security_policy_nonce %>">document.dispatchEvent(new Event("hideforms")); </script>
