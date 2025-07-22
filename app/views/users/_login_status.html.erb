@@ -1,0 +1,12 @@
+  <div class="login-status-div" id="login-status-div-id">
+  <% if !current_user or current_user.guest %>
+  <%= link_to "Sign Up", signup_path  %> or
+      <%= link_to "Log In", login_path %>
+
+  <% else %>
+      Logged in as <%= current_user.email %>. <br>
+      <%= link_to "Log Out", logout_path, method: :delete %>
+  <% end %>
+  </div>
+
+

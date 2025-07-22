@@ -3,7 +3,7 @@
 </script>
 <h1>Sign Up</h1>
 
-<%= form_for @user do |f| %>
+<%= form_for @user, html: { data: { turbo: false } }  do |f| %>
     <% if @user.errors.any? %>
         <div class="error_messages">
           <h2>Form is invalid</h2>
@@ -13,6 +13,9 @@
             <% end %>
           </ul>
         </div>
+        <script nonce="<%= content_security_policy_nonce %>">
+              document.dispatchEvent(new Event("hideforms")); 
+        </script>
     <% end %>
 
     <div class="field">
@@ -36,10 +39,21 @@
       <%= f.password_field :password_confirmation %>
     </div>
 
-    <%= recaptcha_tags  %>
+    <%= recaptcha_tags %>
+   
 
 
     <div class="actions"><%= f.submit "Sign Up" %></div>
 <% end %>
 
-<script nonce="<%= content_security_policy_nonce %>">document.dispatchEvent(new Event("hideforms")); </script>
+<script nonce="<%= content_security_policy_nonce %>">
+document.dispatchEvent(new Event("hideforms")); 
+document.querySelectorAll('textarea[name="g-recaptcha-response"]').forEach((el) => {
+      if (!el.id) {
+        el.remove()
+        return;
+      }
+    });
+</script>
+
+

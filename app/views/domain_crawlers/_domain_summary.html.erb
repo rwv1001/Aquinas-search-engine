@@ -35,7 +35,7 @@
       <div class="float-clear" id="select-domain-div">
         <select id="select-domain-action" name="select-domain-action">
           <option  <% if args[:selected] == DOMAIN_ACTION[:search_domain] %> selected <% end %>    value= <%= DOMAIN_ACTION[:search_domain]%> > Search Domain</option>
-          <% if !current_user.guest %>
+          <% if current_user and !current_user.guest %>
           <option  <% if args[:selected] == DOMAIN_ACTION[:search_groups] %> selected <% end %>     value= <%= DOMAIN_ACTION[:search_groups]%> > Search Groups</option>
           <% end %>
         </select>
@@ -88,7 +88,7 @@
     $("#group_notice").text("<%= @result_str %>");</script>
     <%  @result_str = "" %>
 <% end %>
-<% if current_user.guest %>
+<% if !current_user or current_user.guest %>
     <script nonce="<%= content_security_policy_nonce %>">
       document.dispatchEvent(new Event("domain_summary:guest_loaded"));
     </script>

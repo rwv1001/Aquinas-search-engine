@@ -12,17 +12,24 @@ console.log("r");
         <%= render 'domain_crawlers/new_domain_form', args: {:user_id => current_user.id, :domain_crawler => DomainCrawler.new} %>
         <%= render 'domain_crawlers/new_search_form', args: {:user_id => current_user.id} %>
         <%= render 'domain_crawlers/old_search_form', args: {:user_id => current_user.id} %>
-     <% if !current_user.guest %>
+        <%= render 'domain_crawlers/latin_display' %>
+     <% if current_user and !current_user.guest %>
         <%= render 'domain_crawlers/groups', args: {:selected => GROUP_ACTION[:select_action]} %>
      <% else %>
+        
      
-     <script nonce="<%= content_security_policy_nonce %>">
+
+     <% end%>
+    <script nonce="<%= content_security_policy_nonce %>">
         document.addEventListener("DOMContentLoaded", () => {
         SelectDomainAction();  
         console.log("RWV added DOMContentLoaded event listener")
-        $(".search-new").show();     
-       });
-       document.dispatchEvent(new Event("index:user_loaded"));  
+        $(".search-new").show();
+        LatinDisplayInitializer(); 
+        UpdateLatinDisplayFromSaveSetting();  
+        LoginStatusInitializer();
+});
+       document.dispatchEvent(new Event("index:user_loaded"));
      </script>
-     <% end%>
+
   </div>

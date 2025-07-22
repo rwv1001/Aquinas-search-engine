@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   get "signup", to: "users#new"
   delete "logout", to: "sessions#destroy", as: :logout
   get    "login",  to: "sessions#new"
+  get "/users/login_status", to: "users#login_status"
 
 
   resources :posts

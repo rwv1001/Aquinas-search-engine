@@ -313,14 +313,14 @@ function activateScriptElement(element) {
   if (element.getAttribute("data-turbo-eval") == "false") {
     return element
   } else {
-    console.log(`Activating script element with type "${element.type}"`);
+    //console.log(`Activating script element with type "${element.type}"`);
     const createdScriptElement = document.createElement("script");
     const cspNonce = getCspNonce();
     if (cspNonce) {
-      console.log(`Adding nonce "${cspNonce}" to script element`);
+      //console.log(`Adding nonce "${cspNonce}" to script element`);
       createdScriptElement.nonce = cspNonce;
     }
-    console.log(`Creating script element with type "${element.type}" and textContent "${element.textContent}"`);
+    //console.log(`Creating script element with type "${element.type}" and textContent "${element.textContent}"`);
     createdScriptElement.textContent = element.textContent;
     createdScriptElement.async = false;
     copyElementAttributes(createdScriptElement, element);
@@ -5366,7 +5366,7 @@ class PageRenderer extends Renderer {
 
   async mergeProvisionalElements() {
     const currentNonce = getCspNonce();
-    console.log(`currentNonce =  "${currentNonce}"`);
+    //console.log(`currentNonce =  "${currentNonce}"`);
     const newHeadElements = [...this.newHeadProvisionalElements];
 
     for (const element of this.currentHeadProvisionalElements) {
@@ -5379,7 +5379,7 @@ class PageRenderer extends Renderer {
       document.head.appendChild(element);
     }
     const newNonce = getCspNonce();
-    console.log(`newNonce =  "${newNonce}"`);
+    //console.log(`newNonce =  "${newNonce}"`);
     if (newNonce !== currentNonce) {
       const meta = document.querySelector('meta[name="csp-nonce"]');
       if (meta) {
@@ -5387,7 +5387,7 @@ class PageRenderer extends Renderer {
       }      
     }
     const renewedNonce = getCspNonce();
-    console.log(`renewedNonce =  "${renewedNonce}"`);
+    //console.log(`renewedNonce =  "${renewedNonce}"`);
 
   }
 

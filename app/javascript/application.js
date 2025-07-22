@@ -32,7 +32,7 @@ document.addEventListener("domain_summary:guest_loaded", () => {
   HideOptions();
 });
 document.addEventListener("index:user_loaded", () => {
-  $(".search-new").show();
+  $(".search-new").show();  
 });
 document.addEventListener("group:loaded", () => {
   SelectGroupAction();

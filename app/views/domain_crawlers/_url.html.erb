@@ -65,4 +65,11 @@
 </script>
 </li>
 
+<script nonce="<%= content_security_policy_nonce %>"> 
+window.dispatchEvent(new Event("refresh:loginStatus"));
+LatinDisplayInitializer(); 
+UpdateLatinDisplayFromSaveSetting();  
+</script>
+
+
 

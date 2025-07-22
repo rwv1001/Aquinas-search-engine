@@ -107,6 +107,14 @@ $menu-width: 375px;
 
 }
 
+.latin-display-options{
+  @include put-margin(10px);
+  background-color: $menu-block-color;
+  overflow: auto;
+  padding: 10px;
+  @include div-border($red-border-color, $div-border-width);
+}
+
 .search-new, .search-old{
   @include put-margin(10px);
   background-color: $menu-block-color;

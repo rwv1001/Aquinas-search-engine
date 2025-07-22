@@ -3,5 +3,6 @@
 $('#group-results').replaceWith('<%= j render "domain_crawlers/display_group_results", args: {:group_id => @group_id} %>');
 
 ShowGroupResults();
+UpdateLatinDisplayFromSaveSetting();
 
 $("#group_notice").empty();
