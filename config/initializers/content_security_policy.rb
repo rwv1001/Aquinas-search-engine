@@ -26,13 +26,6 @@
 #
 ## config/initializers/content_security_policy.rb
 Rails.application.config.content_security_policy do |policy|
-    if Rails.env.production?
-    # Development: allow inline scripts (unsafe!)
-    policy.script_src :self,
-                      "https://www.google.com",
-                      "https://www.gstatic.com",
-                      "https://ga.jspm.io"
-    else
   # allow self and reCAPTCHA
   policy.script_src :self,
                     "https://www.google.com",
@@ -40,12 +33,12 @@ Rails.application.config.content_security_policy do |policy|
                       "https://ga.jspm.io",
                     # this lambda injects 'nonce-<random>' into the policy
                     -> { "'nonce-#{content_security_policy_nonce}'" }
-    end
+
 
   policy.frame_src  :self, "https://www.google.com", "https://www.recaptcha.net"
   # ... any other directives you need ...
 end
-unless Rails.env.production?
+
 # Tell Rails how to generate the nonces:
 Rails.application.config.content_security_policy_nonce_generator = ->(request) do
   SecureRandom.base64(16)
@@ -53,4 +46,3 @@ end
 
 # Tell Rails which directives get a nonce:
 Rails.application.config.content_security_policy_nonce_directives = %w[script-src]
-end
