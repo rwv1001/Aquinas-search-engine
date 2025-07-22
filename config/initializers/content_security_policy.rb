@@ -48,7 +48,7 @@ end
 unless Rails.env.production?
 # Tell Rails how to generate the nonces:
 Rails.application.config.content_security_policy_nonce_generator = ->(request) do
-  SecureRandom.base64(4)
+  SecureRandom.base64(16)
 end
 
 # Tell Rails which directives get a nonce:
