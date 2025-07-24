@@ -3,7 +3,7 @@
  */
 import Rails from "@rails/ujs";
 Rails.start();
-console.log("🍪 crawler_page.js loaded!");
+////console.log("🍪 crawler_page.js loaded!");
 function stringToArray(str) {
     // 1) convert single‑quotes to double‑quotes
     const jsony = str.replace(/'/g, '"');
@@ -14,7 +14,7 @@ function stringToArray(str) {
 var old_crawler_page_id = 1;
 function SelectDomain(new_crawler_page_id
 ) {
-    console.log("SelectDomain called")
+    //console.log("SelectDomain called")
 
     const selector_obj = $('[name="domain-selector-' + new_crawler_page_id + '"]');
     //   selector_obj.show();
@@ -27,7 +27,7 @@ function SelectDomain(new_crawler_page_id
 window.SelectDomain = SelectDomain;
 
 function ShowSearchResults() {
-    console.log("ShowSearchResults called");
+    //console.log("ShowSearchResults called");
     var $search_div = $('[id="search-results"]');
     $search_div.show();
     var $search_div = $('[id="instructions"]');
@@ -40,7 +40,7 @@ window.ShowSearchResults = ShowSearchResults;
 
 
 function ShowGroupResults() {
-    console.log("ShowGroupResults called");
+    //console.log("ShowGroupResults called");
     var $search_div = $('[id="search-results"]');
     $search_div.hide();
     var $search_div = $('[id="instructions"]');
@@ -53,7 +53,7 @@ window.ShowGroupResults = ShowGroupResults;
 
 
 function ShowHelp() {
-    console.log("ShowHelp called");
+    //console.log("ShowHelp called");
     var $search_div = $('[id="search-results"]');
     $search_div.hide();
     var $search_div = $('[id="instructions"]');
@@ -65,7 +65,7 @@ function ShowHelp() {
 window.ShowHelp = ShowHelp;
 
 function ShowDominicans() {
-    console.log("ShowDominicans called");
+    //console.log("ShowDominicans called");
     var win = window.open("http://www.op.org", '_blank');
     win.focus();
 }
@@ -73,7 +73,7 @@ window.ShowDominicans = ShowDominicans;
 
 
 function Search() {
-    console.log("Search called");
+    //console.log("Search called");
     var $domain_summary_div = $('[name="domain_summary_pages"]');
     var $cloned_summary = $domain_summary_div.clone();
     var $specific_div = $('[id="specific_action_variables"]');
@@ -89,7 +89,7 @@ window.Search = Search;
 
 
 function SelectCrawlerPage(page_id) {
-    console.log("SelectCrawlerPage called");
+    //console.log("SelectCrawlerPage called");
     const ul_ref_obj_str = 'ul-crawler-page-' + page_id;
     const ul_ref_obj = $('[name="ul-crawler-page-' + page_id + '"]');
 
@@ -112,7 +112,7 @@ window.SelectCrawlerPage = SelectCrawlerPage;
 
 
 function CrawlerPageRange(page_id) {
-    console.log("CrawlerPageRange called");
+    //console.log("CrawlerPageRange called");
     const crawler_page_id_obj = $('[id="crawler_page_id"]');
     crawler_page_id_obj.attr("value", page_id);
     const crawler_page_action_obj = $('[id="crawler_page_action"]');
@@ -127,7 +127,7 @@ window.CrawlerPageRange = CrawlerPageRange;
 
 
 function expandCrawlerPage(page_id) {
-    console.log("expandCrawlerPage called");
+    //console.log("expandCrawlerPage called");
     //ul_ref_obj_str = 'ul-crawler-page-' + page_id;
     //ul_ref_obj = $('[name="ul-crawler-page-'+ page_id+'"]');
 
@@ -151,7 +151,7 @@ window.expandCrawlerPage = expandCrawlerPage;
 
 
 function contractCrawlerPage(page_id) {
-    console.log("contractCrawlerPage called");
+    //console.log("contractCrawlerPage called");
     //  ul_ref_obj_str = 'ul-crawler-page-' + page_id;
     //  ul_ref_obj = $('[name="ul-crawler-page-'+ page_id+'"]');
 
@@ -174,14 +174,14 @@ function contractCrawlerPage(page_id) {
 window.contractCrawlerPage = contractCrawlerPage;
 
 function ProcessMore() {
-    console.log("ProcessMore called");
+    //console.log("ProcessMore called");
     const form_obj = $('[id="process_more_results_form"]');
     Rails.fire(form_obj[0], 'submit');
 }
 window.ProcessMore = ProcessMore;
 
 function MoreResults(more_results_current_index, more_results_range) {
-    console.log("MoreResults called");
+    //console.log("MoreResults called");
     $("#results_current_index").attr("value", more_results_current_index);
     $("#results_range").attr("value", more_results_range);
     const form_obj = $('[id="more_results_form"]');
@@ -190,7 +190,7 @@ function MoreResults(more_results_current_index, more_results_range) {
 window.MoreResults = MoreResults;
 
 function TidyUp() {
-    console.log("TidyUp called");
+    //console.log("TidyUp called");
     const form_obj = $('[id="tidy_up_form"]');
     Rails.fire(form_obj[0], 'submit');
 }
@@ -198,7 +198,7 @@ window.TidyUp = TidyUp;
 
 
 function SelectPreviousSearch(argss) {
-    console.log("SelectPreviousSearch called");
+    //console.log("SelectPreviousSearch called");
     const val = $("#select-previous-search option:selected").val();
 
     const index = $("#select-previous-search").prop('selectedIndex');
@@ -218,7 +218,7 @@ window.SelectPreviousSearch = SelectPreviousSearch;
 
 
 function HideForms() {
-    console.log("HideForms called");
+    //console.log("HideForms called");
     $(".domain-field").hide();
     $('[id="domain-summary"]').hide();
 
@@ -227,7 +227,7 @@ window.HideForms = HideForms;
 
 
 function HideOptions() {
-    console.log("HideOptions called");
+    //console.log("HideOptions called");
     $('[id="select-domain-div"]').hide();
 }
 window.HideOptions = HideOptions;
@@ -235,7 +235,7 @@ window.HideOptions = HideOptions;
 
 
 function SelectDomainAction() {
-    console.log("SelectDomainAction called");
+    //console.log("SelectDomainAction called");
     $("#group_notice").empty();
     const obj = $("#select-domain-action option:selected");
     const value = obj.val();
@@ -355,7 +355,7 @@ window.SelectDomainAction = SelectDomainAction;
 
 
 function SelectGroupAction() {
-    console.log("SelectGroupAction called");
+    //console.log("SelectGroupAction called");
     $("#search_notice").empty();
     $("#group_notice").empty();
     const obj = $("#select-group-action option:selected");
@@ -418,7 +418,7 @@ function SelectGroupAction() {
 window.SelectGroupAction = SelectGroupAction;
 
 function RemoveFromGroup() {
-    console.log("RemoveFromGroup called");
+    //console.log("RemoveFromGroup called");
     const form_obj = $('[id="remove_group_result_form"]');
     Rails.fire(form_obj[0], 'submit');
 }
@@ -426,7 +426,7 @@ window.RemoveFromGroup = RemoveFromGroup;
 
 
 function AddToGroup(group_id) {
-    console.log("AddToGroup called");
+    //console.log("AddToGroup called");
     $("#add_elements_group_id").val(group_id);
     const form_obj = $('[id="add_result_form"]');
     Rails.fire(form_obj[0], 'submit');
@@ -436,7 +436,7 @@ window.AddToGroup = AddToGroup;
 
 
 function RemoveGroup(group_id) {
-    console.log("RemoveGroup called");
+    //console.log("RemoveGroup called");
     const form_obj = $('[id="group_action_form"]');
 
     $('[name="remove_group"]').prop('value', group_id);
@@ -447,7 +447,7 @@ function RemoveGroup(group_id) {
 window.RemoveGroup = RemoveGroup;
 
 function RemoveDomain(crawler_page_id) {
-    console.log("RemoveDomain called");
+    //console.log("RemoveDomain called");
     const form_obj = $('[id="domain_action_form"]');
 
     $('[name="remove_domain"]').prop('value', crawler_page_id);
@@ -460,7 +460,7 @@ window.RemoveDomain = RemoveDomain;
 
 
 function expandGroupName(group_name_id) {
-    console.log("expandGroupName called");
+    //console.log("expandGroupName called");
     const ul_ref_obj_str = 'ul-group-name-' + group_name_id;
     const ul_ref_obj = $('[name="ul-group-name-' + group_name_id + '"]');
 
@@ -475,7 +475,7 @@ function expandGroupName(group_name_id) {
 window.expandGroupName = expandGroupName;
 
 function contractGroupName(group_name_id) {
-    console.log("contractGroupName called");
+    //console.log("contractGroupName called");
     const ul_ref_obj_str = 'ul-group-name-' + group_name_id;
     const ul_ref_obj = $('[name="ul-group-name-' + group_name_id + '"]');
 
@@ -494,7 +494,7 @@ window.contractGroupName = contractGroupName;
 
 function ShowItem(item_name) {
 
-    console.log("ShowItem called");
+    //console.log("ShowItem called");
     const ref_obj = $('[name="' + item_name + '"]');
     ref_obj.show();
     const show_link_ref_obj_str = "show_link_" + item_name;
@@ -507,7 +507,7 @@ function ShowItem(item_name) {
 window.ShowItem = ShowItem;
 
 function HideItem(item_name) {
-    console.log("HideItem called");
+    //console.log("HideItem called");
     const ref_str = '[name="' + item_name + '"]';
 
     const ref_obj = $(ref_str);

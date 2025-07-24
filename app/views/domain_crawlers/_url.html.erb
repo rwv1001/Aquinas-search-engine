@@ -1,46 +1,46 @@
-<script nonce="<%= content_security_policy_nonce %>"> console.log("RWV test7");   </script> 
+<script nonce="<%= content_security_policy_nonce %>"> ////console.log("RWV test7");   </script> 
 <% crawler_page = args[:crawler_page] %>
 <script nonce="<%= content_security_policy_nonce %>">
   // Dump the entire crawler_page object into the browser console:
-  console.log("crawler_page data:", <%= raw(crawler_page.to_json) %>);
+  //console.log("crawler_page data:", <%= raw(crawler_page.to_json) %>);
 </script>
 <% crawler_page_ranges = args[:crawler_page_ranges] %>
 <script nonce="<%= content_security_policy_nonce %>">
   // Dump the entire crawler_page_ranges object into the browser console:
-  console.log("crawler_page_ranges data:", <%= raw(crawler_page_ranges.to_json) %>);
+  //console.log("crawler_page_ranges data:", <%= raw(crawler_page_ranges.to_json) %>);
 </script>
 <% if crawler_page.result_page_id == nil or crawler_page.result_page_id < 0 %>
-<script nonce="<%= content_security_policy_nonce %>"> console.log("RWV test8");   </script> 
+<script nonce="<%= content_security_policy_nonce %>"> ////console.log("RWV test8");   </script> 
     <li class="bad_page" name= "li-crawler-page-<%=crawler_page.id%>"> This page is bad
       <% good_page = false  %>
 <% else %>
-<script nonce="<%= content_security_policy_nonce %>"> console.log("RWV test9");   </script> 
+<script nonce="<%= content_security_policy_nonce %>"> ////console.log("RWV test9");   </script> 
     <li class="good_page" name= "li-crawler-page-<%=crawler_page.id%>">
       <% good_page = true %>
 <% end %>
 
 <% if crawler_page.has_good_children? %>
-<script nonce="<%= content_security_policy_nonce %>"> console.log("RWV test10");   </script> 
+<script nonce="<%= content_security_policy_nonce %>"> ////console.log("RWV test10");   </script> 
     <% display_node = DisplayNode.exists?(user_id: current_user.id, crawler_page_id: crawler_page.id) %>
 <%= render 'domain_crawlers/expand_buttons', args: {:id => crawler_page.id, :display_node => display_node} %>
     <%end%>
 
 <div class="domain-url">
   <% if crawler_page.root? == false %>
-  <script nonce="<%= content_security_policy_nonce %>"> console.log("RWV test11");   </script> 
+  <script nonce="<%= content_security_policy_nonce %>"> ////console.log("RWV test11");   </script> 
 <%= link_to crawler_page.name, crawler_page.URL, target: '_blank'%>
       <% else %>
-      <script nonce="<%= content_security_policy_nonce %>"> console.log("RWV test12");   </script> 
+      <script nonce="<%= content_security_policy_nonce %>"> ////console.log("RWV test12");   </script> 
       <% domain_crawler =crawler_page.domain_crawler %>
       <% if domain_crawler %>
-      <script nonce="<%= content_security_policy_nonce %>"> console.log("RWV test13");   </script> 
+      <script nonce="<%= content_security_policy_nonce %>"> ////console.log("RWV test13");   </script> 
       <%= link_to domain_crawler.short_name, crawler_page.URL, target: '_blank'%>
           <% end %>
-          <script nonce="<%= content_security_policy_nonce %>"> console.log("RWV test14");   </script> 
+          <script nonce="<%= content_security_policy_nonce %>"> ////console.log("RWV test14");   </script> 
   <% end %>
 </div>
 <% if good_page == true %>
-<script nonce="<%= content_security_policy_nonce %>"> console.log("RWV test15");   </script> 
+<script nonce="<%= content_security_policy_nonce %>"> ////console.log("RWV test15");   </script> 
 <div class="domain-field domain-checkbox"> <input type="checkbox" id="checkbox-domain-selector-<%= crawler_page.id %>"  class="check" <% if crawler_page.in_range?(crawler_page_ranges)%> checked <% end %> value=<%= crawler_page.id  %> ></div>
  <script nonce="<%= content_security_policy_nonce %>">
   document.getElementById('checkbox-domain-selector-<%= crawler_page.id %>').addEventListener('click', function() {
@@ -48,7 +48,7 @@
   });
 </script>  
 <% end %>
-<script nonce="<%= content_security_policy_nonce %>"> console.log("RWV test16");   </script> 
+<script nonce="<%= content_security_policy_nonce %>"> ////console.log("RWV test16");   </script> 
 <div class="domain-name-radio domain-field" >
   <input type="radio" name ="domain_radio" <% if crawler_page.root? %> checked <% end %> value=<%=crawler_page.id %> id="domain-name-<%=crawler_page.id %>"  >
 </div>
@@ -67,8 +67,7 @@
 
 <script nonce="<%= content_security_policy_nonce %>"> 
 window.dispatchEvent(new Event("refresh:loginStatus"));
-LatinDisplayInitializer(); 
-UpdateLatinDisplayFromSaveSetting();  
+window.dispatchEvent(new Event("latininitializers"));
 </script>
 
 

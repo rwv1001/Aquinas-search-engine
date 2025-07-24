@@ -1,5 +1,5 @@
 <script nonce="<%= content_security_policy_nonce %>">
-  console.log("b");
+  //console.log("b");
 </script>
 <div class="domain-summary" id="domain-summary">
   <div class="float-left">
@@ -80,7 +80,7 @@
   </div>
 </div>
 <script nonce="<%= content_security_policy_nonce %>">
-  console.log("RWV test7");  
+  ////console.log("RWV test7");  
   document.dispatchEvent(new Event("domain_summary:loaded"));
 </script>
 <% if @result_str.length >0 %>

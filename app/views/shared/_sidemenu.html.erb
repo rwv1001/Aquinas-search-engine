@@ -1,5 +1,5 @@
     <script nonce="<%= content_security_policy_nonce %>">
-console.log("r");
+//console.log("r");
   </script> 
   
   <%= render 'users/user_header', current_user: current_user %>
@@ -23,8 +23,12 @@ console.log("r");
     <script nonce="<%= content_security_policy_nonce %>">
         document.addEventListener("DOMContentLoaded", () => {
         SelectDomainAction();  
-        console.log("RWV added DOMContentLoaded event listener")
+        ////console.log("RWV added DOMContentLoaded event listener")
         $(".search-new").show();
+        document.addEventListener("latininitializers", () => {
+            LatinDisplayInitializer(); 
+            UpdateLatinDisplayFromSaveSetting();  
+      });
         LatinDisplayInitializer(); 
         UpdateLatinDisplayFromSaveSetting();  
         LoginStatusInitializer();

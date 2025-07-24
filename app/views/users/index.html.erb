@@ -1,9 +1,8 @@
 <script nonce="<%= content_security_policy_nonce %>">
 document.dispatchEvent(new Event("index:user_loaded"));  
 window.dispatchEvent(new Event("refresh:loginStatus"));
-LatinDisplayInitializer(); 
-UpdateLatinDisplayFromSaveSetting();  
+document.dispatchEvent(new Event("latininitializers"));
 
 
-console.log("t");
+//console.log("t");
 </script>

@@ -1,6 +1,6 @@
 <script nonce="<%= content_security_policy_nonce %>">
-  console.log("e");  
-  console.log("This script’s nonce is:", document.currentScript.nonce);
+  //console.log("e");  
+  //console.log("This script’s nonce is:", document.currentScript.nonce);
 </script>
 <% previous_queries = SearchQuery.where(user_id: args[:user_id]).order('view_priority desc').first(MAX_QUERY_STORE)%>
 <div id = "previous_queries_div" >
@@ -31,8 +31,8 @@
                 var chosen = event.target.value;
                if (!chosen) return;
       // Your JS logic here; for demo we just log it:
-                console.log("User selected widget:", chosen);  
-                console.log("raw(arg_array.to_json)=",<%= raw(arg_array.to_json) %>)
+                //console.log("User selected widget:", chosen);  
+                //console.log("raw(arg_array.to_json)=",<%= raw(arg_array.to_json) %>)
                 SelectPreviousSearch(<%= raw(arg_array.to_json) %>);
                });
            </script> 

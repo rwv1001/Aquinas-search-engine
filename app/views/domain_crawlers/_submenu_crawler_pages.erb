@@ -1,7 +1,7 @@
 <% crawler_page = args[:crawler_page] %>
 <script nonce="<%= content_security_policy_nonce %>">
-  console.log("RWV test5");
-console.log("RWV test7");
+  //console.log("RWV test5");
+//console.log("RWV test7");
   </script> 
 
     <%= render 'domain_crawlers/url', args: {:crawler_page => crawler_page, :crawler_page_ranges => args[:crawler_page_ranges]} %>
