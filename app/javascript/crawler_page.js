@@ -218,10 +218,11 @@ window.SelectPreviousSearch = SelectPreviousSearch;
 
 
 function HideForms() {
-    //console.log("HideForms called");
+    console.log("HideForms called - hiding domain fields and summary");
+    console.log("jQuery available:", typeof $ !== 'undefined');
+    console.log("Elements found:", $(".domain-field").length, $('[id="domain-summary"]').length);
     $(".domain-field").hide();
     $('[id="domain-summary"]').hide();
-
 }
 window.HideForms = HideForms;
 

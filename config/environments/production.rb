@@ -78,6 +78,12 @@ Rails.application.configure do
   # caching is enabled.
   config.action_mailer.perform_caching = false
 
+  # Configure ActionMailer for production URLs (without port, using nginx reverse proxy)
+  config.action_mailer.default_url_options = { 
+    host: ENV['PRODUCTION_HOST'] || 'yourdomain.com',
+    protocol: 'https'
+  }
+
   # Ignore bad email addresses and do not raise email delivery errors.
   # Set this to true and configure the email server for immediate delivery to raise delivery errors.
   # config.action_mailer.raise_delivery_errors = false

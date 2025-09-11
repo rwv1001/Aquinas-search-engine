@@ -39,6 +39,8 @@ gem "bootsnap", require: false
 
 gem "recaptcha", require: "recaptcha/rails"
 
+gem "httparty"  # For Microsoft Graph API calls
+
 gem "prime"
 
 

@@ -1,14 +1,14 @@
 services:
   db:
     image: postgres:15
-    container_name: agatha-postgres-prod
+    container_name: aquinas-postgres-prod
     environment:
       - POSTGRES_DB=${ENV_POSTGRES_DB}
       - POSTGRES_USER=${ENV_POSTGRES_USER}
       - POSTGRES_PASSWORD=${ENV_POSTGRES_PASSWORD}
     volumes:
       - postgres_data:/var/lib/postgresql/data
-      - /home/robert/thomas/backup:/backups
+      - /home/rverrill/thomasbackup:/backups
     command: ["postgres", "-c", "max_connections=500"]
     restart: unless-stopped
     ports:

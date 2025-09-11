@@ -21,7 +21,14 @@ class User < ApplicationRecord
     generate_token(:password_reset_token)
     self.password_reset_sent_at = Time.zone.now
     save!
-    UserMailer.password_reset(self).deliver
+    
+    begin
+      GraphUserMailer.password_reset(self)
+      true
+    rescue EmailDeliveryError => e
+      Rails.logger.error "Failed to send password reset email: #{e.message}"
+      false
+    end
   end
 
   def generate_token(column)

@@ -39,6 +39,24 @@ document.addEventListener("group:loaded", () => {
   SelectDomainAction();
 });
 document.addEventListener("hideforms", () => {
-  HideForms();
+  console.log("hideforms event received, calling HideForms()");
+  console.log("HideForms function available:", typeof window.HideForms);
+  console.log("jQuery available:", typeof $ !== 'undefined');
+  
+  function executeHideForms() {
+    if (typeof window.HideForms === 'function' && typeof $ !== 'undefined') {
+      window.HideForms();
+      return true;
+    }
+    return false;
+  }
+  
+  // Try immediately
+  if (!executeHideForms()) {
+    console.log("Functions not ready, retrying...");
+    // Retry with delays
+    setTimeout(executeHideForms, 100);
+    setTimeout(executeHideForms, 500);
+  }
 });
 

@@ -1,15 +1,66 @@
 <h1>Reset Password</h1>
+<style>
+  .password-reset-form {
+    max-width: 400px;
+    margin: 0 auto;
+  }
 
-<%= form_for @user, :url => password_reset_path(params[:id]) do |f| %>
+  .password-reset-form .field {
+    margin-bottom: 15px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .password-reset-form .field label {
+    margin-bottom: 5px;
+    font-weight: bold;
+  }
+
+  .password-reset-form .field input[type="password"] {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .password-reset-form .actions {
+    margin-top: 20px;
+  }
+
+  .password-reset-form .actions input[type="submit"] {
+    background-color: #6c757d;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+  }
+
+  .password-reset-form .actions input[type="submit"]:hover {
+    background-color: #5a6268;
+  }  .password-reset-form .error_messages {
+    background-color: #f8d7da;
+    border: 1px solid #f5c6cb;
+    color: #721c24;
+    padding: 10px;
+    border-radius: 4px;
+    margin-bottom: 20px;
+  }
+</style>
+<div class="password-reset-form">
+  <%= form_for @user, :url => password_reset_path(params[:id]) do |f| %>
     <% if @user.errors.any? %>
-        <div class="error_messages">
-          <h2>Form is invalid</h2>
-          <ul>
-            <% for message in @user.errors.full_messages %>
-                <li><%= message %></li>
-            <% end %>
-          </ul>
-        </div>
+      <div class="error_messages">
+        <h2>Form is invalid</h2>
+        <ul>
+          <% for message in @user.errors.full_messages %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
     <% end %>
     <div class="field">
       <%= f.label :password %>
@@ -20,6 +71,42 @@
       <%= f.password_field :password_confirmation %>
     </div>
     <div class="actions"><%= f.submit "Update Password" %></div>
-<% end %>
+  <% end %>
+</div>
+<script nonce="<%= content_security_policy_nonce %>">
+  console.log("Password reset edit page loaded, checking for HideForms function...");
 
-<script nonce="<%= content_security_policy_nonce %>">document.dispatchEvent(new Event("hideforms"));</script>
+  function tryHideForms() {
+    console.log("Attempting to hide forms...");
+    console.log("HideForms function exists:", typeof window.HideForms);
+    console.log("jQuery loaded:", typeof $ !== 'undefined');
+
+    if (typeof window.HideForms === 'function' && typeof $ !== 'undefined') {
+      console.log("Both HideForms and jQuery are available, calling HideForms...");
+      window.HideForms();
+      return true;
+    }
+    return false;
+  }
+
+  // Try immediately
+  if (!tryHideForms()) {
+    console.log("Not ready yet, setting up fallback strategies...");
+
+    // Strategy 1: Try when DOM content is loaded
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', tryHideForms);
+    }
+
+    // Strategy 2: Try when window is fully loaded
+    window.addEventListener('load', tryHideForms);
+
+    // Strategy 3: Try with a short delay to allow modules to load
+    setTimeout(tryHideForms, 100);
+    setTimeout(tryHideForms, 500);
+    setTimeout(tryHideForms, 1000);
+
+    // Strategy 4: Dispatch the event as a fallback
+    document.dispatchEvent(new Event("hideforms"));
+  }
+</script>

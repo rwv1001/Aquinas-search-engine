@@ -1,39 +1,136 @@
     <script nonce="<%= content_security_policy_nonce %>">
-//console.log("r");
-  </script> 
-  
-  <%= render 'users/user_header', current_user: current_user %>
-  <% flash.each do |message_type, message| %>
-      <div class="alert alert-<%= message_type %>"><%= message %></div>
-  <% end %>
+  //console.log("r");
+</script>
+<style>
+  .alert {
+    margin: 10px 0;
+    padding: 12px 15px;
+    border-radius: 8px;
+    text-align: center;
+    font-weight: bold;
+    box-sizing: border-box;
+    transition: opacity 0.5s ease-out;
+  }
 
-  <div class="domain-crawler">
-        <%= render 'domain_crawlers/domain_summary', args: {:selected => DOMAIN_ACTION[:select_action]}  %>
-        <%= render 'domain_crawlers/new_domain_form', args: {:user_id => current_user.id, :domain_crawler => DomainCrawler.new} %>
-        <%= render 'domain_crawlers/new_search_form', args: {:user_id => current_user.id} %>
-        <%= render 'domain_crawlers/old_search_form', args: {:user_id => current_user.id} %>
-        <%= render 'domain_crawlers/latin_display' %>
-     <% if current_user and !current_user.guest %>
-        <%= render 'domain_crawlers/groups', args: {:selected => GROUP_ACTION[:select_action]} %>
-     <% else %>
-        
-     
+  .alert.fade-out {
+    opacity: 0;
+  }
 
-     <% end%>
-    <script nonce="<%= content_security_policy_nonce %>">
-        document.addEventListener("DOMContentLoaded", () => {
-        SelectDomainAction();  
-        ////console.log("RWV added DOMContentLoaded event listener")
-        $(".search-new").show();
-        document.addEventListener("latininitializers", () => {
-            LatinDisplayInitializer(); 
-            UpdateLatinDisplayFromSaveSetting();  
-      });
-        LatinDisplayInitializer(); 
-        UpdateLatinDisplayFromSaveSetting();  
-        LoginStatusInitializer();
-});
-       document.dispatchEvent(new Event("index:user_loaded"));
-     </script>
+  .alert-notice {
+    background-color: #d4edda;
+    border: 2px solid #28a745;
+    color: #155724;
+  }
 
-  </div>
+  .alert-alert {
+    background-color: #f8d7da;
+    border: 2px solid #dc3545;
+    color: #721c24;
+  }
+
+  .alert-error {
+    background-color: #f8d7da;
+    border: 2px solid #dc3545;
+    color: #721c24;
+  }
+</style>
+<%= render 'users/user_header', current_user: current_user %>
+<% flash.each do |message_type, message| %>
+  <div class="alert alert-<%= message_type %>" data-auto-hide="true"><%= message %></div>
+<% end %>
+<script nonce="<%= content_security_policy_nonce %>">
+  // Immediately set up auto-hide for any alerts that exist right now
+  (function() {
+    const alerts = document.querySelectorAll('.alert[data-auto-hide="true"]');
+    console.log("Immediate setup: Found", alerts.length, "alert(s) to auto-hide");
+
+    alerts.forEach(function(alert, index) {
+      console.log("Setting up immediate auto-hide for alert", index + 1, ":", alert.textContent.trim());
+
+      // Mark as processed to avoid duplicate timers
+      alert.setAttribute('data-auto-hide', 'processing');
+
+      setTimeout(function() {
+        console.log("Fading out alert", index + 1);
+        alert.classList.add('fade-out');
+
+        setTimeout(function() {
+          if (alert.parentNode) {
+            console.log("Removing alert", index + 1);
+            alert.remove();
+          }
+        }, 500);
+
+      }, 15000);
+    });
+  })();
+</script>
+<script nonce="<%= content_security_policy_nonce %>">
+  // Auto-hide notifications after 15 seconds
+  function setupAutoHideAlerts() {
+    console.log("Setting up auto-hide for alerts...");
+    const alerts = document.querySelectorAll('.alert');
+    console.log("Found", alerts.length, "alert(s)");
+
+    alerts.forEach(function(alert, index) {
+      console.log("Setting up auto-hide for alert", index + 1, "with classes:", alert.className);
+
+      setTimeout(function() {
+        console.log("Starting fade-out for alert", index + 1);
+        // Add fade-out class for smooth transition
+        alert.classList.add('fade-out');
+
+        // Remove the element after the transition completes
+        setTimeout(function() {
+          if (alert.parentNode) {
+            console.log("Removing alert", index + 1);
+            alert.parentNode.removeChild(alert);
+          }
+        }, 500); // Wait for the 0.5s transition to complete
+
+      }, 15000); // 15 seconds
+    });
+  }
+
+  // Try multiple approaches to catch the alerts
+  document.addEventListener('DOMContentLoaded', setupAutoHideAlerts);
+
+  // Also try after a short delay in case content is loaded dynamically
+  setTimeout(setupAutoHideAlerts, 100);
+  setTimeout(setupAutoHideAlerts, 500);
+  setTimeout(setupAutoHideAlerts, 1000);
+
+  // If the DOM is already loaded, run immediately
+  if (document.readyState === 'loading') {
+    // DOM is still loading
+  } else {
+    // DOM is already loaded
+    setupAutoHideAlerts();
+  }
+</script>
+<div class="domain-crawler">
+  <%= render 'domain_crawlers/domain_summary', args: {:selected => DOMAIN_ACTION[:select_action]}  %>
+  <%= render 'domain_crawlers/new_domain_form', args: {:user_id => current_user.id, :domain_crawler => DomainCrawler.new} %>
+  <%= render 'domain_crawlers/new_search_form', args: {:user_id => current_user.id} %>
+  <%= render 'domain_crawlers/old_search_form', args: {:user_id => current_user.id} %>
+  <%= render 'domain_crawlers/latin_display' %>
+  <% if current_user and !current_user.guest %>
+    <%= render 'domain_crawlers/groups', args: {:selected => GROUP_ACTION[:select_action]} %>
+  <% else %>
+  <% end%>
+  <script nonce="<%= content_security_policy_nonce %>">
+    document.addEventListener("DOMContentLoaded", () => {
+    SelectDomainAction();
+    ////console.log("RWV added DOMContentLoaded event listener")
+    $(".search-new").show();
+    document.addEventListener("latininitializers", () => {
+        LatinDisplayInitializer();
+        UpdateLatinDisplayFromSaveSetting();
+          });
+    LatinDisplayInitializer();
+    UpdateLatinDisplayFromSaveSetting();
+    LoginStatusInitializer();
+    });
+           document.dispatchEvent(new Event("index:user_loaded"));
+  </script>
+</div>
