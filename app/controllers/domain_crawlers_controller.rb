@@ -4,6 +4,12 @@ class DomainCrawlersController < ApplicationController
     logger.info "DomainCrawlersController index called with method #{params[:method]}"
     @users = User.all
 
+    # Check if user just logged in and show welcome message
+    if session[:just_logged_in]
+      flash.now[:notice] = "Welcome back! You have been logged in successfully."
+      session.delete(:just_logged_in)
+    end
+
 
     case params[:method]
     when "set_header"
