@@ -1,57 +1,47 @@
 <!DOCTYPE html>
-
 <html>
-<%= stylesheet_link_tag "application" %>
-<script nonce="<%= content_security_policy_nonce %>" data-turbo-eval="false">
-  // make the nonce available to your other scripts
-  window._cspNonce = "<%= content_security_policy_nonce %>";
-  //console.log("a This script’s nonce is:", document.currentScript.nonce);
-</script>
-
-<head>
-  <title>St. Thomas the Search Engine</title>
-  <%= csrf_meta_tags %>
-  <%= csp_meta_tag %>
-  
-  <!-- Simple favicon setup using Shield2.png -->
-  <link rel="icon" type="image/png" href="/Shield2.png" sizes="152x149">
-  <link rel="shortcut icon" href="/Shield2.png" type="image/png">
-  
-  <% if  current_user == nil or current_user.email == nil %>
-  <script nonce="<%= content_security_policy_nonce %>">//console.log("recaptcha api loaded ", document.currentScript.nonce);</script>
-  <script nonce="<%= content_security_policy_nonce %>" src='https://www.google.com/recaptcha/api.js'> </script>
-  <% else %>
-  <script nonce="<%= content_security_policy_nonce %>">//console.log("recaptcha for logged in user:", <%= raw(current_user.to_json) %> );</script>
-  
-  <% end %>
-
-
-<%= javascript_importmap_tags %>
-
-
-
-</head>
-
-<body>
-  <script nonce="<%= content_security_policy_nonce %>">
-  //console.log("o");  
-</script>
-<%= render 'shared/favicon' %>
-<% @result_str = "" %>
-<div class="sidemenu">
- <%= render "shared/sidemenu" %>
- <%= yield %>
-</div>
-
-<%= render "shared/menu" %>
-
-<div class="main-panel">
-  <div class="main-panel-content">
-    
-    <%= render 'shared/instructions' %>
-    <div id="search-results" ></div>
-    <div id="group-results"></div>
-  </div>
-</div>
-</body>
+  <%= stylesheet_link_tag "application" %>
+  <script nonce="<%= content_security_policy_nonce %>" data-turbo-eval="false">
+    // make the nonce available to your other scripts
+    window._cspNonce = "<%= content_security_policy_nonce %>";
+    //console.log("a This script’s nonce is:", document.currentScript.nonce);
+  </script>
+  <head>
+    <title>St. Thomas the Search Engine</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <!-- Simple favicon setup using Shield2.png -->
+    <link rel="icon" type="image/png" href="/Shield2.png" sizes="152x149">
+    <link rel="shortcut icon" href="/Shield2.png" type="image/png">
+    <% if  current_user == nil or current_user.email == nil %>
+      <script nonce="<%= content_security_policy_nonce %>">
+        //console.log("recaptcha api loaded ", document.currentScript.nonce);
+      </script>
+      <script nonce="<%= content_security_policy_nonce %>" src='https://www.google.com/recaptcha/api.js'></script>
+    <% else %>
+      <script nonce="<%= content_security_policy_nonce %>">
+        //console.log("recaptcha for logged in user:", <%= raw(current_user.to_json) %> );
+      </script>
+    <% end %>
+    <%= javascript_importmap_tags %>
+  </head>
+  <body>
+    <script nonce="<%= content_security_policy_nonce %>">
+      //console.log("o");
+    </script>
+    <%= render 'shared/favicon' %>
+    <% @result_str = "" %>
+    <div class="sidemenu">
+      <%= render "shared/sidemenu" %>
+      <%= yield %>
+    </div>
+    <%= render "shared/menu" %>
+    <div class="main-panel">
+      <div class="main-panel-content">
+        <%= render 'shared/instructions' %>
+        <div id="search-results" ></div>
+        <div id="group-results"></div>
+      </div>
+    </div>
+  </body>
 </html>
