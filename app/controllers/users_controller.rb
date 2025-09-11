@@ -46,7 +46,7 @@ Rails.logger.debug "Manual verification: #{result.inspect}"
       session[:user_id] =@user.id
 
 
-      redirect_to domain_crawlers_url, notice: ""
+      redirect_to domain_crawlers_url, notice: "Account successfully created! Welcome to St. Thomas the Search Engine."
     else
       if !verify_captcha_value
         @user.errors.add(:base, "CAPTCHA verification failed. Please try again.")
