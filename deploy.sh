@@ -24,5 +24,5 @@ echo "Copying .env file to production server"
 scp -P 22222 .env "$PROD_SERVER:$PROD_DIR"
 scp -P 22222 restoredb-remote.sh "$PROD_SERVER:$PROD_DIR"
 echo "Pulling the latest image on the production server"
-ssh -p 22222 "$PROD_SERVER" "docker pull $IMAGE_NAME:$IMAGE_TAG && cd $PROD_DIR && docker compose -f docker-compose-pull.yml down -v && docker compose -f docker-compose-pull.yml up -d --build && sleep 20"
+ssh -p 22222 "$PROD_SERVER" "docker pull $IMAGE_NAME:$IMAGE_TAG && cd $PROD_DIR && docker compose -f docker-compose-pull.yml down -v && docker compose -f docker-compose-pull.yml up -d --build && sleep 20 && ./restoredb-remote.sh && echo 'Exit code: $?'"
 
