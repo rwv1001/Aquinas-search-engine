@@ -11,7 +11,15 @@ class ApplicationController < ActionController::Base
 def current_user
   @current_user ||= begin
     if session[:user_id]
-      User.find_by(id: session[:user_id])
+      user = User.find_by(id: session[:user_id])
+      if user
+        user
+      else
+        # Session contains invalid user_id (e.g., after database restore)
+        u = User.new_guest
+        session[:user_id] = u.id
+        u
+      end
     else
       u = User.new_guest
       session[:user_id] = u.id
