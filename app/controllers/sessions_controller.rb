@@ -46,10 +46,10 @@ class SessionsController < ApplicationController
 
 
       logger.info "session redirect to domain_crawlers"
-      redirect_to domain_crawlers_url, notice: ""
+      redirect_to domain_crawlers_url, notice: "Welcome back! You have been logged in successfully."
     else
-      flash.now[:alert] = "Invalid email or password"
-      render :new
+      flash[:alert] = "Either the username or password was incorrect"
+      redirect_to login_path
     end
   end
 

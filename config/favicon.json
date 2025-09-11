@@ -1,0 +1,46 @@
+{
+  "favicon_generation": {
+    "api_key": "87434450e85706c4e0fd921d1dca8413739fd72b",
+    "master_picture": {
+      "type": "inline",
+      "content": "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNkYPhfDwAChwGA60e6kgAAAABJRU5ErkJggg=="
+    },
+    "files_location": {
+      "type": "path",
+      "path": "/app/assets/images/favicon"
+    },
+    "preview_picture_url": "https://realfavicongenerator.net/demo_favicon.png",
+    "favicon_design": {
+      "ios": {
+        "picture_aspect": "background_and_margin",
+        "background_color": "#ffffff",
+        "margin": "14%"
+      },
+      "desktop_browser": {},
+      "windows": {
+        "picture_aspect": "white_silhouette",
+        "background_color": "#da532c"
+      },
+      "android_chrome": {
+        "picture_aspect": "shadow",
+        "theme_color": "#ffffff",
+        "manifest": {
+          "name": "St. Thomas the Search Engine",
+          "display": "standalone",
+          "orientation": "not_set",
+          "on_conflict": "override",
+          "declared": true
+        }
+      },
+      "safari_pinned_tab": {
+        "picture_aspect": "silhouette",
+        "theme_color": "#5bbad5"
+      }
+    },
+    "settings": {
+      "compression": 3,
+      "scaling_algorithm": "Mitchell",
+      "error_on_image_too_small": false
+    }
+  }
+}
