@@ -79,8 +79,8 @@ function Search() {
     var $specific_div = $('[id="specific_action_variables"]');
     $specific_div = $specific_div.empty();
     $specific_div.html($cloned_summary);
-    $("#search_notice").empty();
-    $("#search_notice").text("Please wait ...");
+    $("#search_notice").empty().removeClass('has-content');
+    $("#search_notice").text("Please wait ...").addClass('has-content');
     $("#search_notice").show();
     const form_obj = $('[id="search_form"]');
     Rails.fire(form_obj[0], 'submit');
@@ -237,7 +237,7 @@ window.HideOptions = HideOptions;
 
 function SelectDomainAction() {
     //console.log("SelectDomainAction called");
-    $("#group_notice").empty();
+    $("#group_notice").empty().removeClass('has-content');
     const obj = $("#select-domain-action option:selected");
     const value = obj.val();
     switch (value) {
@@ -357,8 +357,8 @@ window.SelectDomainAction = SelectDomainAction;
 
 function SelectGroupAction() {
     //console.log("SelectGroupAction called");
-    $("#search_notice").empty();
-    $("#group_notice").empty();
+    $("#search_notice").empty().removeClass('has-content');
+    $("#group_notice").empty().removeClass('has-content');
     const obj = $("#select-group-action option:selected");
     const value = obj.val();
     //alert("value = " + obj.val());

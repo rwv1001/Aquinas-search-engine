@@ -9,4 +9,4 @@ expandGroupName(<%= group_id %>);
 var $radios = $('input:radio[name=group_radio]');
 $radios.filter('[value=<%= @group_parent_id %>]').prop('checked', true);
 
-$("#group_notice").empty();
+$("#group_notice").empty().removeClass('has-content');

@@ -419,10 +419,18 @@ td{
   display: none;
 }
 #group_notice, #search_notice{
-
   background-color: #d2e8ff;
   padding: 3px 3px 3px 3px;
   display: none;
+}
+
+#group_notice.has-content, #search_notice.has-content {
+  display: block;
+}
+
+/* Fallback: hide if truly empty */
+#group_notice:empty, #search_notice:empty {
+  display: none !important;
 }
 
 

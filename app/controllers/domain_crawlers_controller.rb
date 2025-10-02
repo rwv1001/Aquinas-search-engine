@@ -1,4 +1,6 @@
 class DomainCrawlersController < ApplicationController
+  before_action :require_super_user, only: [:new, :create, :domain_action, :delete_result, :remove_group_result]
+  
   def index
     @result_str = ""
     logger.info "DomainCrawlersController index called with method #{params[:method]}"
@@ -593,6 +595,7 @@ class DomainCrawlersController < ApplicationController
   end
 
   def analyse_domain(params)
+    return unless SuperUser.exists?(user_id: current_user)
     logger.info "analyse_domain begin"
     flash[:notice] = "analysing domain"
     flow_str = params[:flow_str]
@@ -603,6 +606,7 @@ class DomainCrawlersController < ApplicationController
   end
 
   def fix_domain(params)
+    return unless SuperUser.exists?(user_id: current_user)
     logger.info "fix_domain begin"
     @result_str = "hello"
     domain_crawler_id = CrawlerPage.find_by_id(params[:domain_radio]).domain_crawler_id
@@ -617,18 +621,7 @@ class DomainCrawlersController < ApplicationController
     @selected = DOMAIN_ACTION[:fix_domain]
   end
   def deaccent_domain(params)
-    logger.info "deaccent_domain begin"
-    crawler_page = CrawlerPage.find_by_id(params[:domain_radio])
-    domain_crawler_id = crawler_page.domain_crawler_id
-    domain_crawler = DomainCrawler.find_by_id(domain_crawler_id)
-
-
-    result_str = domain_crawler.deaccent_domain(crawler_page)
-    #   call_rake :fix_domain, :domain_crawler_id => domain_crawler_id
-    flash[:notice] = "deaccenting domain"
-    @selected = DOMAIN_ACTION[:deaccent_domain]
-  end
-  def deaccent_domain(params)
+    return unless SuperUser.exists?(user_id: current_user)
     logger.info "deaccent_domain begin"
     crawler_page = CrawlerPage.find_by_id(params[:domain_radio])
     domain_crawler_id = crawler_page.domain_crawler_id
@@ -641,6 +634,7 @@ class DomainCrawlersController < ApplicationController
     @selected = DOMAIN_ACTION[:deaccent_domain]
   end
   def reorder_pages(params)
+    return unless SuperUser.exists?(user_id: current_user)
     logger.info "reorder_pages begin parama = #{params}"
     crawler_page = CrawlerPage.find_by_id(params[:domain_radio])
     domain_crawler_id = crawler_page.domain_crawler_id
@@ -661,6 +655,7 @@ class DomainCrawlersController < ApplicationController
   end
 
   def set_paragraphs(params)
+    return unless SuperUser.exists?(user_id: current_user)
     logger.info "set_paragraphs begin"
     first_null_id = WordSingleton.find_by_sql("SELECT * FROM word_singletons WHERE paragraph_id IS NULL LIMIT 1").first
     if first_null_id != nil
@@ -680,6 +675,7 @@ class DomainCrawlersController < ApplicationController
   end
 
   def remove_domain(params)
+    return unless SuperUser.exists?(user_id: current_user)
     logger.info "remove_domain begin"
     @selected = DOMAIN_ACTION[:remove_domain]
     crawler_page_name = CrawlerPage.find_by_id(params[:remove_domain])
@@ -701,6 +697,7 @@ class DomainCrawlersController < ApplicationController
   end
 
   def rename_domain(params)
+    return unless SuperUser.exists?(user_id: current_user)
     crawler_page_name = CrawlerPage.find_by_id(params[:domain_radio])
     crawler_page_name.name = params[:domain_action_name]
     crawler_page_name.save
@@ -715,6 +712,7 @@ class DomainCrawlersController < ApplicationController
   end
 
   def move_domain(params)
+    return unless SuperUser.exists?(user_id: current_user)
     pages_in_range = CrawlerPage.get_pages_in_range(current_user.id)
     new_parent = CrawlerPage.find_by_id(params[:move_location_domain_radio])
     logger.info "move domain crawler_range = #{pages_in_range.inspect}"
@@ -781,5 +779,16 @@ class DomainCrawlersController < ApplicationController
   def domain_crawler_params
     logger.info "DomainCrawlersController domain_crawler_params called"
     params.require(:domain_crawler).permit(:user_id, :domain_home_page, :short_name, :description, :filter, :flow_str)
+  end
+
+  private
+
+  def require_super_user
+    unless SuperUser.exists?(user_id: current_user)
+      logger.warn "Unauthorized access attempt to admin function by user #{current_user&.id || 'guest'}"
+      flash[:alert] = "Access denied. You don't have permission to perform this action."
+      redirect_to root_path
+      return false
+    end
   end
 end

@@ -1,4 +1,4 @@
 
-$("#group_notice").empty();
+$("#group_notice").empty().removeClass('has-content');
 $("#group_notice").show();
-$("#group_notice").text("<%= @result_str %>");
+$("#group_notice").text("<%= @result_str %>").addClass('has-content');

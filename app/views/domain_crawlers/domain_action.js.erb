@@ -15,6 +15,6 @@ var $radios = $('input:radio[name=domain_radio]');
 $radios.filter('[value=<%= @crawler_parent_id %>]').prop('checked', true);
 <% end %>
 
-$("#group_notice").empty();
+$("#group_notice").empty().removeClass('has-content');
 
 
