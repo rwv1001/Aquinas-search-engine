@@ -1,36 +1,28 @@
   //console.log("m");  
-
 ShowSearchResults();
-
 $('#search-results').replaceWith('<%= j render "search_results/display_results", args: {:user_id => current_user.id, :first_result_id => @first_result_id, :last_result_id => @last_result_id, :show_previous => @show_previous, :show_next => @show_next, :query_id => @query_id}%>');
 $('#previous_queries_div').replaceWith('<%= j render "domain_crawlers/old_search_form", args: {:user_id => current_user.id} %>')
 $('#show-prev-next').replaceWith('<%= j render "domain_crawlers/show_prev_next", args: {:first_result_id => @first_result_id, :last_result_id => @last_result_id, :show_previous => @show_previous, :show_next => @show_next}%>');
-
 $("#group_notice").empty().removeClass('has-content');
 $("#search_notice").empty().removeClass('has-content');
 $("#search_notice").show();
 $(".search-old").show();
 $(".latin-display-options").show();
-
 <% if @search_results.length >0 %>
-$("#search_notice").text("Showing 1 to <%= @last_result_id - @first_result_id + 1 %> of <%= @search_results.length %>, Unprocessed Results: <%= @unprocessed_sentence_count %>").addClass('has-content');
-UpdateLatinDisplayFromSaveSetting();
+  $("#search_notice").text("Showing 1 to <%= @last_result_id - @first_result_id + 1 %> of <%= @search_results.length %>, Unprocessed Results: <%= @unprocessed_sentence_count %>").addClass('has-content');
+  UpdateLatinDisplayFromSaveSetting();
 <% else %>
-$("#search_notice").text("No results found").addClass('has-content');
-
+  $("#search_notice").text("No results found").addClass('has-content');
 <% end %>
-
 <% if @unprocessed_sentence_count >0 %>
-ProcessMore()
+  ProcessMore()
 <% else %>
-TidyUp()
+  TidyUp()
 <% end %>
-
 <% if @domain_length == 0 %>
-alert("You haven't selected any domains!");
-<% @truncate_length = 0 %>
+  alert("You haven't selected any domains!");
+  <% @truncate_length = 0 %>
 <% end %>
-
 <% if @truncate_length > 0 %>
-alert("Results truncated: <%= @truncate_length %> found, truncated to <%= MAX_RESULTS %>")
+  alert("Results truncated: <%= @truncate_length %> found, truncated to <%= MAX_RESULTS %>")
 <% end %>

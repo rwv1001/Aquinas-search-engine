@@ -1,7 +1,6 @@
 $("#search_notice").text("Showing <%= @first_index  %> to <%= @last_index %> of <%= @found_results %>, Unprocessed Results: <%= @unprocessed_sentence_count %>").addClass('has-content');
-
 <% if @unprocessed_sentence_count >0 %>
-ProcessMore()
+  ProcessMore()
 <% else %>
-TidyUp()
+  TidyUp()
 <% end %>
