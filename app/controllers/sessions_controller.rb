@@ -55,8 +55,9 @@ class SessionsController < ApplicationController
   end
 
   def destroy
-    reset_session
     logger.info "session destroyed"
+    reset_session
+    session[:just_logged_out] = true
     redirect_to root_path
   end
 end

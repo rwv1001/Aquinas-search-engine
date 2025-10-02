@@ -3,6 +3,10 @@ document.dispatchEvent(new Event("index:user_loaded"));
 window.dispatchEvent(new Event("refresh:loginStatus"));
 document.dispatchEvent(new Event("latininitializers"));
 
+<% if @just_logged_out %>
+console.log("User just logged out, dispatching domain_summary:guest_loaded event");
+document.dispatchEvent(new Event("domain_summary:guest_loaded"));
+<% end %>
 
 //console.log("t");
 </script>

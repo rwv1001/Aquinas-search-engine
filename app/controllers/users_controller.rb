@@ -64,6 +64,7 @@ Rails.logger.debug "Manual verification: #{result.inspect}"
   def index
     logger.info "UsersController index called"
     @users = User.all
+    @just_logged_out = session.delete(:just_logged_out)
   end
 
   def update
